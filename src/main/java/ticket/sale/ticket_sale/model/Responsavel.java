@@ -1,11 +1,13 @@
 package ticket.sale.ticket_sale.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Responsavel {
@@ -19,6 +21,9 @@ public class Responsavel {
     private String cidade;
     private String uf;
     private String endereco;
+
+    @OneToMany
+    private List<Evento> evento;
 
 
 
