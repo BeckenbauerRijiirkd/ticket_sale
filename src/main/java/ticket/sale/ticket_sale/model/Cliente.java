@@ -1,11 +1,13 @@
 package ticket.sale.ticket_sale.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente {
@@ -17,6 +19,9 @@ public class Cliente {
     private String cpf;
     private String cidade;
     private String uf;
+
+    @OneToMany
+    private List<Venda> compra;
 
     public Cliente() {
     }
