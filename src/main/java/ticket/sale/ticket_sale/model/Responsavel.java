@@ -16,7 +16,7 @@ public class Responsavel {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private LocalDate dataNasc;
+    private LocalDate nascimento;
     private String cpf;
     private String cidade;
     private String uf;
@@ -32,9 +32,9 @@ public class Responsavel {
 
     
 
-    public Responsavel(String nome, LocalDate dataNasc, String cpf, String cidade, String uf, String endereco) {
+    public Responsavel(String nome, LocalDate nascimento, String cpf, String cidade, String uf, String endereco) {
         this.nome = nome;
-        this.dataNasc = dataNasc;
+        this.nascimento = nascimento;
         this.cpf = cpf;
         this.cidade = cidade;
         this.uf = uf;
@@ -60,11 +60,11 @@ public class Responsavel {
     }
 
     public LocalDate getDataNasc() {
-        return dataNasc;
+        return nascimento;
     }
 
-    public void setDataNasc(LocalDate dataNasc) {
-        this.dataNasc = dataNasc;
+    public void setDataNasc(LocalDate nascimento) {
+        this.nascimento = nascimento;
     }
 
     public String getCpf() {

@@ -3,12 +3,13 @@ package ticket.sale.ticket_sale.model;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.ManyToAny;
 
 @Entity
 public class Evento {
@@ -21,7 +22,9 @@ public class Evento {
     @ManyToOne
     private Responsavel responsavel;
     private Double valor;
-    private Double valorMeia = (valor / 2);
+    private Double valorMeia;
+    
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     public Evento() {
