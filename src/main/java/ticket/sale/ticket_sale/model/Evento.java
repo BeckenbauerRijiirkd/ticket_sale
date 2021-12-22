@@ -1,6 +1,7 @@
 package ticket.sale.ticket_sale.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ import javax.persistence.OneToMany;
 public class Evento {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String nome;
     private LocalDate data;
     
@@ -29,13 +30,13 @@ public class Evento {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @OneToMany
-    private List<Venda> venda;
+    @OneToMany(mappedBy = "evento")
+    private List<Venda> venda = new ArrayList<>();
 
     public Evento() {
     }
 
-    public Evento(String nome, LocalDate data, Responsavel responsavel, Double valor, Status status) {
+    public Evento(String nome, LocalDate data, Responsavel responsavel, Double valor, Status status){
         this.nome = nome;
         this.data = data;
         this.responsavel = responsavel;
@@ -43,11 +44,11 @@ public class Evento {
         this.status = status;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -93,6 +94,15 @@ public class Evento {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    
+    public List<Venda> getVenda() {
+        return venda;
+    }
+
+    public void setVenda(List<Venda> venda) {
+        this.venda = venda;
     }
 
 }
