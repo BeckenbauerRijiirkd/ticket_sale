@@ -14,7 +14,7 @@ import ticket.sale.ticket_sale.model.Responsavel;
 import ticket.sale.ticket_sale.repository.ResponsavelRepository;
 
 @RestController
-@RequestMapping("/responsavel")
+@RequestMapping("/responsaveis")
 public class ResponsavelController {
     
     @Autowired

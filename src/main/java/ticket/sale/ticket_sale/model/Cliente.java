@@ -20,7 +20,7 @@ public class Cliente {
     private String cidade;
     private String uf;
 
-    @OneToMany
+    @OneToMany(mappedBy = "cliente")
     private List<Venda> compra;
 
     public Cliente() {
@@ -81,6 +81,15 @@ public class Cliente {
     public void setUf(String uf) {
         this.uf = uf;
     }
+
+    public List<Venda> getCompra() {
+        return compra;
+    }
+
+    public void setCompra(List<Venda> compra) {
+        this.compra = compra;
+    }
+    
     
 
 }
