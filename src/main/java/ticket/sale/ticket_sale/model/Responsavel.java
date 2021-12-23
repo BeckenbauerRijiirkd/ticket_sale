@@ -22,7 +22,7 @@ public class Responsavel {
     private String uf;
     private String endereco;
 
-    @OneToMany
+    @OneToMany(mappedBy = "responsavel")
     private List<Evento> evento;
 
 
@@ -98,5 +98,19 @@ public class Responsavel {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
+
+
+
+    public List<Evento> getEvento() {
+        return evento;
+    }
+
+
+
+    public void setEvento(List<Evento> evento) {
+        this.evento = evento;
+    }
+
+    
 
 }
