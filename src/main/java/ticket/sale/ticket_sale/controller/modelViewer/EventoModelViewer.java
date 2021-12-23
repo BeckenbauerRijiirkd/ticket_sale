@@ -56,13 +56,8 @@ public class EventoModelViewer {
         
             Responsavel responsavel = responsavelAux.get();
 
-            return new Evento(nome, data, responsavel, valor, (valor / 2), status.A_REALIZAR);
+            return new Evento(nome, data, responsavel, valor, (valor / 2), status.VENDAS_ABERTAS);
         }
-        
-
-        return null;
-        
+            return null;
         }
-
-        
     }
