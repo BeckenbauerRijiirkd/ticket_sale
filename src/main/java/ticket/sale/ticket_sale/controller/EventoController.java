@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,13 +16,17 @@ import ticket.sale.ticket_sale.controller.dto.EventoDto;
 import ticket.sale.ticket_sale.controller.modelViewer.EventoModelViewer;
 import ticket.sale.ticket_sale.model.Evento;
 import ticket.sale.ticket_sale.repository.EventoRepository;
+import ticket.sale.ticket_sale.repository.ResponsavelRepository;
 
 @RestController
-@RequestMapping("/Eventos")
+@RequestMapping("/eventos")
 public class EventoController {
     
     @Autowired
     private EventoRepository eventoRepository;
+
+    @Autowired
+    private ResponsavelRepository responsavelRepository;
 
     @GetMapping
     public ResponseEntity<List<EventoDto>> listar(){
@@ -33,9 +38,14 @@ public class EventoController {
     }
 
     @PostMapping
-    public void CriarEvento(@RequestBody EventoModelViewer eventoModelViewer){
+    @Transactional
+    public ResponseEntity<String> CriarEvento(@RequestBody EventoModelViewer eventoModelViewer){
 
-        System.out.println(eventoModelViewer);
+        Evento evento = eventoModelViewer.converter(responsavelRepository);
+
+        eventoRepository.save(evento);
+        
+        return(ResponseEntity.ok("Evento Criado Com Sucesso"));
     }
 
 }

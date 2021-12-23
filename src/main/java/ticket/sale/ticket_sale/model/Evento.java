@@ -36,11 +36,12 @@ public class Evento {
     public Evento() {
     }
 
-    public Evento(String nome, LocalDate data, Responsavel responsavel, Double valor, Status status){
+    public Evento(String nome, LocalDate data, Responsavel responsavel, Double valor, Double valorMeia, Status status){
         this.nome = nome;
         this.data = data;
         this.responsavel = responsavel;
         this.valor = valor;
+        this.valorMeia = valorMeia;
         this.status = status;
     }
 
