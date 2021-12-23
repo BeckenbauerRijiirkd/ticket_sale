@@ -3,17 +3,28 @@ package ticket.sale.ticket_sale.controller.modelViewer;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import ticket.sale.ticket_sale.model.Evento;
 import ticket.sale.ticket_sale.model.Responsavel;
 import ticket.sale.ticket_sale.model.Status;
 import ticket.sale.ticket_sale.repository.ResponsavelRepository;
 
 public class EventoModelViewer {
-    
+    @NotNull @NotEmpty
     private String nome;
+
+    @NotNull
     private LocalDate data;
+
+    @NotNull @NotEmpty
     private Long respontavelId;
+
+    @NotNull @NotEmpty
     private Double valor;
+
+    @NotNull
     private Status status;
 
     public String getNome() {
