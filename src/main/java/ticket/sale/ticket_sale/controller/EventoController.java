@@ -43,8 +43,12 @@ public class EventoController {
 
         Evento evento = eventoModelViewer.converter(responsavelRepository);
 
+        if(evento == null){
+            return(ResponseEntity.badRequest().body("Responsavel não encontrado"));
+        }
+
         eventoRepository.save(evento);
-        
+
         return(ResponseEntity.ok("Evento Criado Com Sucesso"));
     }
 
