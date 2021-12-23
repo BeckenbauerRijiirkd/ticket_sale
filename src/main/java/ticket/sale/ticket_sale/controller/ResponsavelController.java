@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ticket.sale.ticket_sale.controller.dto.EventoDto;
 import ticket.sale.ticket_sale.controller.dto.ResponsavelDto;
 import ticket.sale.ticket_sale.model.Responsavel;
 import ticket.sale.ticket_sale.repository.ResponsavelRepository;
