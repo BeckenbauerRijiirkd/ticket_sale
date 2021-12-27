@@ -3,6 +3,8 @@ package ticket.sale.ticket_sale.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +41,7 @@ public class EventoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<String> CriarEvento(@RequestBody EventoModelViewer eventoModelViewer){
+    public ResponseEntity<String> CriarEvento(@RequestBody @Valid EventoModelViewer eventoModelViewer){
 
         Evento evento = eventoModelViewer.converter(responsavelRepository);
 

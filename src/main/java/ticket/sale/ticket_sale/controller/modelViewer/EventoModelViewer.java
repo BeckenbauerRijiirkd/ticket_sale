@@ -1,5 +1,7 @@
 package ticket.sale.ticket_sale.controller.modelViewer;
 
+import static ticket.sale.ticket_sale.model.Status.VENDAS_ABERTAS;
+
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -8,7 +10,6 @@ import javax.validation.constraints.NotNull;
 
 import ticket.sale.ticket_sale.model.Evento;
 import ticket.sale.ticket_sale.model.Responsavel;
-import ticket.sale.ticket_sale.model.Status;
 import ticket.sale.ticket_sale.repository.ResponsavelRepository;
 
 public class EventoModelViewer {
@@ -18,14 +19,11 @@ public class EventoModelViewer {
     @NotNull
     private LocalDate data;
 
-    @NotNull @NotEmpty
-    private Long respontavelId;
-
-    @NotNull @NotEmpty
-    private Double valor;
+    @NotNull
+    private Long responsavelId;
 
     @NotNull
-    private Status status;
+    private Double valor;
 
     public String getNome() {
         return nome;
@@ -39,11 +37,11 @@ public class EventoModelViewer {
     public void setData(LocalDate data) {
         this.data = data;
     }
-    public Long getRespontavelId() {
-        return respontavelId;
+    public Long getResponsavelId() {
+        return responsavelId;
     }
-    public void setRespontavelId(Long respontavelId) {
-        this.respontavelId = respontavelId;
+    public void setResponsavelId(Long respontavelId) {
+        this.responsavelId = respontavelId;
     }
     public Double getValor() {
         return valor;
@@ -52,22 +50,26 @@ public class EventoModelViewer {
         this.valor = valor;
     }
     
-    public Status getStatus() {
-        return status;
-    }
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-    
-    public Evento converter(ResponsavelRepository responsavelRepository) {
-            
-        Optional<Responsavel>  responsavelAux = responsavelRepository.findById(respontavelId);
+    public Responsavel VerificarResponsvel (ResponsavelRepository responsavelRepository){
+
+        Optional<Responsavel>  responsavelAux = responsavelRepository.findById(responsavelId);
         
         if(responsavelAux.isPresent()){
         
             Responsavel responsavel = responsavelAux.get();
+            
+            return responsavel;
+        }
+            return null;
+        }
 
-            return new Evento(nome, data, responsavel, valor, (valor / 2), status.VENDAS_ABERTAS);
+    public Evento converter(ResponsavelRepository responsavelRepository) {
+            
+        Responsavel responsavel = VerificarResponsvel(responsavelRepository);
+        
+        if(responsavel != null){
+
+            return new Evento(nome, data, responsavel, valor, (valor / 2), VENDAS_ABERTAS);
         }
             return null;
         }
