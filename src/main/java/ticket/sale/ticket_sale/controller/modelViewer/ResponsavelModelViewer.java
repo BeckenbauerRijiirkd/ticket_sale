@@ -2,8 +2,11 @@ package ticket.sale.ticket_sale.controller.modelViewer;
 
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import ticket.sale.ticket_sale.model.Responsavel;
 import ticket.sale.ticket_sale.repository.ResponsavelRepository;
+import ticket.sale.ticket_sale.service.ResponsavelService;
 
 public class ResponsavelModelViewer {
 
@@ -50,27 +53,10 @@ public class ResponsavelModelViewer {
         this.endereco = endereco;
     }
 
-    public Boolean VerificarCpf(ResponsavelRepository responsavelRepository) {
-            
-        Responsavel responsavel = responsavelRepository.findByCpf(cpf);
-        
-        if(responsavel != null){
-
-            return false;
-
-        }
-            return true;
-        }
     
-    public Responsavel Converter(ResponsavelModelViewer responsavelModelViewer, ResponsavelRepository responsavelRepository){
+    public Responsavel Converter(ResponsavelModelViewer responsavelModelViewer){
 
-        if (VerificarCpf(responsavelRepository))
-        {
-            return new Responsavel(nome, dataNascimento, cpf, cidade, uf, endereco);
-        }
-
-        return null;
-        
+        return new Responsavel(nome, dataNascimento, cpf, cidade, uf, endereco);
     }
     
 }

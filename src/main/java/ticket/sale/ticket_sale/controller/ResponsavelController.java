@@ -17,6 +17,7 @@ import ticket.sale.ticket_sale.controller.dto.ResponsavelDto;
 import ticket.sale.ticket_sale.controller.modelViewer.ResponsavelModelViewer;
 import ticket.sale.ticket_sale.model.Responsavel;
 import ticket.sale.ticket_sale.repository.ResponsavelRepository;
+import ticket.sale.ticket_sale.service.ResponsavelService;
 
 @RestController
 @RequestMapping("/responsaveis")
@@ -24,6 +25,9 @@ public class ResponsavelController {
     
     @Autowired
     private ResponsavelRepository responsavelRepository;
+
+    @Autowired
+    ResponsavelService responsavelService;
     
     @GetMapping
     public ResponseEntity<List<ResponsavelDto>> listar(){
@@ -37,10 +41,10 @@ public class ResponsavelController {
     @PostMapping
     @Transactional
     public ResponseEntity<String> CriarEvento(@RequestBody @Valid ResponsavelModelViewer responsavelModelViewer){
+        
+        Responsavel responsavel = responsavelModelViewer.Converter(responsavelModelViewer);
 
-        Responsavel responsavel = responsavelModelViewer.Converter(responsavelModelViewer, responsavelRepository);
-
-        if(responsavel == null){
+        if(responsavelService.verificarCpf(responsavelModelViewer.getCpf()) == false){
             return(ResponseEntity.badRequest().body("Cpf Ja cadastrado!"));
         }
 
