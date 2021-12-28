@@ -2,12 +2,7 @@ package ticket.sale.ticket_sale.controller.modelViewer;
 
 import java.time.LocalDate;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import ticket.sale.ticket_sale.model.Responsavel;
-import ticket.sale.ticket_sale.repository.ResponsavelRepository;
-import ticket.sale.ticket_sale.service.ResponsavelService;
-
 public class ResponsavelModelViewer {
 
     private String nome;
@@ -53,7 +48,6 @@ public class ResponsavelModelViewer {
         this.endereco = endereco;
     }
 
-    
     public Responsavel Converter(ResponsavelModelViewer responsavelModelViewer){
 
         return new Responsavel(nome, dataNascimento, cpf, cidade, uf, endereco);

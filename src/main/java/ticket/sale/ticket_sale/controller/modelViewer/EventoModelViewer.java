@@ -3,14 +3,12 @@ package ticket.sale.ticket_sale.controller.modelViewer;
 import static ticket.sale.ticket_sale.model.Status.VENDAS_ABERTAS;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import ticket.sale.ticket_sale.model.Evento;
 import ticket.sale.ticket_sale.model.Responsavel;
-import ticket.sale.ticket_sale.repository.ResponsavelRepository;
 
 public class EventoModelViewer {
     @NotNull @NotEmpty
@@ -49,28 +47,10 @@ public class EventoModelViewer {
     public void setValor(Double valor) {
         this.valor = valor;
     }
-    
-    public Responsavel VerificarResponsvel (ResponsavelRepository responsavelRepository){
 
-        Optional<Responsavel>  responsavelAux = responsavelRepository.findById(responsavelId);
-        
-        if(responsavelAux.isPresent()){
-        
-            Responsavel responsavel = responsavelAux.get();
-            
-            return responsavel;
-        }
-            return null;
-        }
-
-    public Evento converter(ResponsavelRepository responsavelRepository) {
-            
-        Responsavel responsavel = VerificarResponsvel(responsavelRepository);
-        
-        if(responsavel != null){
-
-            return new Evento(nome, data, responsavel, valor, (valor / 2), VENDAS_ABERTAS);
-        }
-            return null;
-        }
+    public Evento converter(Responsavel responsavel) {
+ 
+        return new Evento(nome, data, responsavel, valor, (valor / 2), VENDAS_ABERTAS);
+ 
     }
+}

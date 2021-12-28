@@ -1,5 +1,7 @@
 package ticket.sale.ticket_sale.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,4 +26,17 @@ ResponsavelRepository responsavelRepository;
         }
             return true;
     }
+
+    public Responsavel verificarResponsvel(Long responsavelId){
+
+        Optional<Responsavel>  responsavelAux = responsavelRepository.findById(responsavelId);
+        
+        if(responsavelAux.isPresent()){
+        
+            Responsavel responsavel = responsavelAux.get();
+            
+            return responsavel;
+        }
+            return null;
+        }
 }

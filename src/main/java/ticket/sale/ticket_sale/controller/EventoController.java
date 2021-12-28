@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ticket.sale.ticket_sale.controller.dto.EventoDto;
 import ticket.sale.ticket_sale.controller.modelViewer.EventoModelViewer;
 import ticket.sale.ticket_sale.model.Evento;
+import ticket.sale.ticket_sale.model.Responsavel;
 import ticket.sale.ticket_sale.repository.EventoRepository;
-import ticket.sale.ticket_sale.repository.ResponsavelRepository;
+import ticket.sale.ticket_sale.service.ResponsavelService;
 
 @RestController
 @RequestMapping("/eventos")
@@ -28,7 +29,7 @@ public class EventoController {
     private EventoRepository eventoRepository;
 
     @Autowired
-    private ResponsavelRepository responsavelRepository;
+    ResponsavelService responsavelService;
 
     @GetMapping
     public ResponseEntity<List<EventoDto>> listar(){
@@ -43,11 +44,13 @@ public class EventoController {
     @Transactional
     public ResponseEntity<String> CriarEvento(@RequestBody @Valid EventoModelViewer eventoModelViewer){
 
-        Evento evento = eventoModelViewer.converter(responsavelRepository);
+        Responsavel responsavel = responsavelService.verificarResponsvel(eventoModelViewer.getResponsavelId());
 
-        if(evento == null){
+        if(responsavel == null){
             return(ResponseEntity.badRequest().body("Responsavel não encontrado"));
         }
+
+        Evento evento = eventoModelViewer.converter(responsavel);
 
         eventoRepository.save(evento);
 
