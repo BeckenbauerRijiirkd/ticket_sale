@@ -17,6 +17,7 @@ import ticket.sale.ticket_sale.controller.dto.ClienteDto;
 import ticket.sale.ticket_sale.controller.modelViewer.ClienteModelViewer;
 import ticket.sale.ticket_sale.model.Cliente;
 import ticket.sale.ticket_sale.repository.ClienteRepository;
+import ticket.sale.ticket_sale.service.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
@@ -25,6 +26,9 @@ public class ClienteController {
         
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private ClienteService clienteService;
         
     @GetMapping
     public ResponseEntity<List<ClienteDto>> listar(){
@@ -39,14 +43,16 @@ public class ClienteController {
     @Transactional
     public ResponseEntity<String> CriarEvento(@RequestBody @Valid ClienteModelViewer clienteModelViewer){
 
-        Cliente cliente = clienteModelViewer.Converter(clienteModelViewer,clienteRepository);
-
-        if(cliente == null){
+        if(clienteService.verificarCpf(clienteModelViewer.getCpf()) == false){
             return(ResponseEntity.badRequest().body("Cpf Ja cadastrado!"));
         }
+
+        Cliente cliente = clienteModelViewer.Converter();
 
         clienteRepository.save(cliente);
 
         return(ResponseEntity.ok("Cliente Cadastrado Com Sucesso"));
     }
+
+
 }

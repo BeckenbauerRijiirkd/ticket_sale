@@ -21,4 +21,16 @@ public class ClienteService {
         }
         return cliente.get();
     }
+
+    public Boolean verificarCpf(String cpf) {
+            
+        Cliente cliente = clienteRepository.findByCpf(cpf);
+        
+        if(cliente != null){
+
+            return false;
+
+        }
+            return true;
+        }
 }

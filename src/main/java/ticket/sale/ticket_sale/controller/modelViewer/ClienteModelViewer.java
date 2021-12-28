@@ -57,28 +57,10 @@ public class ClienteModelViewer {
     public void setUf(String uf) {
         this.uf = uf;
     }
-
-    public Boolean VerificarCpf(ClienteRepository clienteRepository) {
-            
-        Cliente cliente = clienteRepository.findByCpf(cpf);
-        
-        if(cliente != null){
-
-            return false;
-
-        }
-            return true;
-        }
     
-    public Cliente Converter(ClienteModelViewer clienteModelViewer, ClienteRepository clienteRepository){
+    public Cliente Converter(){
 
-        if (VerificarCpf(clienteRepository))
-        {
-            return new Cliente(nome, dataNascimento, cpf, cidade, uf);
-        }
-
-        return null;
-        
+        return new Cliente(nome, dataNascimento, cpf, cidade, uf);  
     }
 
 }
