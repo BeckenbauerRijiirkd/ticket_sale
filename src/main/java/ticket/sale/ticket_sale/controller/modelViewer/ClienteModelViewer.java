@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import ticket.sale.ticket_sale.model.Cliente;
-import ticket.sale.ticket_sale.repository.ClienteRepository;
 
 public class ClienteModelViewer {
 
