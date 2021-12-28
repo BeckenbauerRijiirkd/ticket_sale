@@ -28,9 +28,8 @@ public class Venda {
     public Venda() {
     }
 
-    public Venda(Long id, Evento evento, Cliente cliente, TipoIngresso tipoIngresso, int qtdIngresso,
+    public Venda(Evento evento, Cliente cliente, TipoIngresso tipoIngresso, int qtdIngresso,
             double valorTotal) {
-        this.id = id;
         this.evento = evento;
         this.cliente = cliente;
         this.tipoIngresso = tipoIngresso;

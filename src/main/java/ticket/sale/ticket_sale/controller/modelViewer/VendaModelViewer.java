@@ -1,5 +1,6 @@
 package ticket.sale.ticket_sale.controller.modelViewer;
 
+import ticket.sale.ticket_sale.model.TipoIngresso;
 
 public class VendaModelViewer {
 
@@ -7,7 +8,7 @@ public class VendaModelViewer {
 
     private Long clienteId;
 
-    private String tipoIngresso;
+    private TipoIngresso tipoIngresso;
 
     private int qtdIngresso;
 
@@ -16,7 +17,7 @@ public class VendaModelViewer {
     public VendaModelViewer() {
     }
 
-    public VendaModelViewer(Long eventoId, Long clienteId, String tipoIngresso, int qtdIngresso,
+    public VendaModelViewer(Long eventoId, Long clienteId, TipoIngresso tipoIngresso, int qtdIngresso,
             Double valorTotal) {
         this.eventoId = eventoId;
         this.clienteId = clienteId;
@@ -41,11 +42,11 @@ public class VendaModelViewer {
         this.clienteId = clienteId;
     }
 
-    public String getTipoIngresso() {
+    public TipoIngresso getTipoIngresso() {
         return tipoIngresso;
     }
 
-    public void setTipoIngresso(String tipoIngresso) {
+    public void setTipoIngresso(TipoIngresso tipoIngresso) {
         this.tipoIngresso = tipoIngresso;
     }
 

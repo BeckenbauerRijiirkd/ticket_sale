@@ -19,6 +19,7 @@ import ticket.sale.ticket_sale.model.Venda;
 import ticket.sale.ticket_sale.repository.VendaRepository;
 import ticket.sale.ticket_sale.service.ClienteService;
 import ticket.sale.ticket_sale.service.EventoService;
+import ticket.sale.ticket_sale.service.VendaService;
 
 @RestController
 @RequestMapping("/vendas")
@@ -32,6 +33,9 @@ public class VendaController {
 
     @Autowired
     private EventoService eventoService;
+
+    @Autowired
+    private VendaService vendaService;
 
     @GetMapping
     public ResponseEntity<List<VendaDto>> listar(){
@@ -62,8 +66,9 @@ public class VendaController {
             return ResponseEntity.badRequest().body("Evento fechado para vendas");
         }
         
-        
-        return ResponseEntity.ok("Ok");
+        vendaService.emitirVenda(evento, cliente, vendaModelViewer);
+
+        return ResponseEntity.ok("Venda Emitida Com Sucesso");
     }
 
 }
