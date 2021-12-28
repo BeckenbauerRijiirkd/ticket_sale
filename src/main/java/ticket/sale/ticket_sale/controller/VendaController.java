@@ -12,8 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ticket.sale.ticket_sale.controller.dto.VendaDto;
 import ticket.sale.ticket_sale.controller.modelViewer.VendaModelViewer;
+import ticket.sale.ticket_sale.model.Cliente;
+import ticket.sale.ticket_sale.model.Evento;
+import ticket.sale.ticket_sale.model.Status;
 import ticket.sale.ticket_sale.model.Venda;
 import ticket.sale.ticket_sale.repository.VendaRepository;
+import ticket.sale.ticket_sale.service.ClienteService;
+import ticket.sale.ticket_sale.service.EventoService;
 
 @RestController
 @RequestMapping("/vendas")
@@ -21,7 +26,13 @@ public class VendaController {
     
     @Autowired
     private VendaRepository vendaRepository;
-    
+
+    @Autowired
+    private ClienteService clienteservice;
+
+    @Autowired
+    private EventoService eventoService;
+
     @GetMapping
     public ResponseEntity<List<VendaDto>> listar(){
         
@@ -31,9 +42,28 @@ public class VendaController {
     
     }
 
-    @PostMapping
-    public void EmitirVenda(@RequestBody VendaModelViewer VendaModelViewer){
+    //(expressão booleana) ? código 1 : código 2;
 
+
+    @PostMapping
+    public ResponseEntity<?> EmitirVenda(@RequestBody VendaModelViewer vendaModelViewer){
+
+        Cliente cliente = clienteservice.verificarCliente(vendaModelViewer.getClienteId());
+        if(cliente == null){
+            return ResponseEntity.badRequest().body("Cliente não Encontrado");
+        }
+
+        Evento evento = eventoService.verificarEvento(vendaModelViewer.getEventoId());
+        if(evento == null){
+            return ResponseEntity.badRequest().body("Evento não encontrado");
+        }
+
+        if(evento.getStatus() != Status.VENDAS_ABERTAS){
+            return ResponseEntity.badRequest().body("Evento fechado para vendas");
+        }
+        
+        
+        return ResponseEntity.ok("Ok");
     }
 
 }
