@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ticket.sale.ticket_sale.controller.modelViewer.ClienteModelViewer;
+import ticket.sale.ticket_sale.controller.modelViewer.ClienteUpdateModelViewer;
 import ticket.sale.ticket_sale.model.Cliente;
 import ticket.sale.ticket_sale.repository.ClienteRepository;
 
@@ -54,5 +55,15 @@ public class ClienteService {
         clienteRepository.save(cliente);
 
         return (true);
+    }
+
+    public Cliente atualizar(Cliente cliente, ClienteUpdateModelViewer clienteUpdateModelViewer) {
+        
+        cliente.setNome(clienteUpdateModelViewer.getNome());
+        cliente.setDataNasc(clienteUpdateModelViewer.getDataNascimento());
+        cliente.setCidade(clienteUpdateModelViewer.getCidade());
+        cliente.setUf(clienteUpdateModelViewer.getUf());
+
+        return cliente;
     }
 }
