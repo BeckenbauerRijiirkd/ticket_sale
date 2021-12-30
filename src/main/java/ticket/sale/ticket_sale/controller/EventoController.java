@@ -17,14 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import ticket.sale.ticket_sale.controller.dto.EventoDto;
 import ticket.sale.ticket_sale.controller.modelViewer.EventoModelViewer;
 import ticket.sale.ticket_sale.service.EventoService;
-import ticket.sale.ticket_sale.service.ResponsavelService;
 
 @RestController
 @RequestMapping("/eventos")
 public class EventoController {
-    
-    @Autowired
-    ResponsavelService responsavelService;
 
     @Autowired
     EventoService eventoService;

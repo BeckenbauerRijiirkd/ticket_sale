@@ -15,16 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ticket.sale.ticket_sale.controller.dto.ResponsavelDto;
 import ticket.sale.ticket_sale.controller.modelViewer.ResponsavelModelViewer;
-import ticket.sale.ticket_sale.model.Responsavel;
-import ticket.sale.ticket_sale.repository.ResponsavelRepository;
 import ticket.sale.ticket_sale.service.ResponsavelService;
 
 @RestController
 @RequestMapping("/responsaveis")
 public class ResponsavelController {
-    
-    @Autowired
-    private ResponsavelRepository responsavelRepository;
 
     @Autowired
     ResponsavelService responsavelService;
@@ -32,9 +27,7 @@ public class ResponsavelController {
     @GetMapping
     public ResponseEntity<List<ResponsavelDto>> listar(){
         
-        List<Responsavel> responsavel = responsavelRepository.findAll();
-
-        return ResponseEntity.ok(ResponsavelDto.converter(responsavel));
+        return ResponseEntity.ok(ResponsavelDto.converter(responsavelService.buscarResponsaveis()));
     
     }
 

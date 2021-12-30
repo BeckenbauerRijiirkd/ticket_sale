@@ -1,5 +1,6 @@
 package ticket.sale.ticket_sale.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,10 @@ public class ResponsavelService {
 @Autowired
 ResponsavelRepository responsavelRepository;
 
+    public List<Responsavel> buscarResponsaveis(){
+
+        return responsavelRepository.findAll();
+    }
 
     public Boolean verificarCpf(String cpf) {
             
