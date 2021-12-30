@@ -15,8 +15,6 @@ import ticket.sale.ticket_sale.controller.modelViewer.VendaModelViewer;
 import ticket.sale.ticket_sale.model.Cliente;
 import ticket.sale.ticket_sale.model.Evento;
 import ticket.sale.ticket_sale.model.Status;
-import ticket.sale.ticket_sale.model.Venda;
-import ticket.sale.ticket_sale.repository.VendaRepository;
 import ticket.sale.ticket_sale.service.ClienteService;
 import ticket.sale.ticket_sale.service.EventoService;
 import ticket.sale.ticket_sale.service.VendaService;
@@ -42,7 +40,7 @@ public class VendaController {
     }
 
     @PostMapping
-    public ResponseEntity<?> EmitirVenda(@RequestBody VendaModelViewer vendaModelViewer){
+    public ResponseEntity<String> EmitirVenda(@RequestBody VendaModelViewer vendaModelViewer){
 
         Cliente cliente = clienteservice.verificarCliente(vendaModelViewer.getClienteId());
         if(cliente == null){

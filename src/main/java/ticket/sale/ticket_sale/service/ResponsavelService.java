@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ticket.sale.ticket_sale.controller.modelViewer.ResponsavelModelViewer;
 import ticket.sale.ticket_sale.model.Responsavel;
 import ticket.sale.ticket_sale.repository.ResponsavelRepository;
 
@@ -19,24 +20,26 @@ ResponsavelRepository responsavelRepository;
             
         Responsavel responsavel = responsavelRepository.findByCpf(cpf);
         
-        if(responsavel != null){
-
-            return false;
-
-        }
-            return true;
+        return (responsavel != null) ? false : true;
     }
 
     public Responsavel verificarResponsvel(Long responsavelId){
 
         Optional<Responsavel>  responsavelAux = responsavelRepository.findById(responsavelId);
-        
-        if(responsavelAux.isPresent()){
-        
-            Responsavel responsavel = responsavelAux.get();
-            
-            return responsavel;
+
+        return (responsavelAux.isPresent() ? responsavelAux.get() : null);
+    }
+
+    public Boolean cadastrarResponsavel(ResponsavelModelViewer responsavelModelViewer){
+
+        if(verificarCpf(responsavelModelViewer.getCpf()) == false){
+            return(false);
         }
-            return null;
-        }
+
+        Responsavel responsavel = responsavelModelViewer.Converter();
+
+        responsavelRepository.save(responsavel);
+
+        return (true);
+    }
 }

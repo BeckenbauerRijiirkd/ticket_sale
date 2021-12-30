@@ -40,16 +40,10 @@ public class ResponsavelController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<String> CriarEvento(@RequestBody @Valid ResponsavelModelViewer responsavelModelViewer){
+    public ResponseEntity<String> cadastraResponsavel(@RequestBody @Valid ResponsavelModelViewer responsavelModelViewer){
         
-        Responsavel responsavel = responsavelModelViewer.Converter(responsavelModelViewer);
-
-        if(responsavelService.verificarCpf(responsavelModelViewer.getCpf()) == false){
-            return(ResponseEntity.badRequest().body("Cpf Ja cadastrado!"));
-        }
-
-        responsavelRepository.save(responsavel);
-
-        return(ResponseEntity.ok("Responsavel Cadastrado Com Sucesso"));
+        return (responsavelService.cadastrarResponsavel(responsavelModelViewer) ? 
+                ResponseEntity.ok("Responsavel Cadastrado Com Sucesso") :
+                ResponseEntity.badRequest().body("Cpf Ja Cadastrado"));
     }
 }

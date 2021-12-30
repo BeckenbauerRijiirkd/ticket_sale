@@ -1,10 +1,12 @@
 package ticket.sale.ticket_sale.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ticket.sale.ticket_sale.controller.modelViewer.ClienteModelViewer;
 import ticket.sale.ticket_sale.model.Cliente;
 import ticket.sale.ticket_sale.repository.ClienteRepository;
 
@@ -13,6 +15,11 @@ public class ClienteService {
     
     @Autowired
     ClienteRepository clienteRepository;
+
+    public List<Cliente> buscarClientes(){
+
+        return clienteRepository.findAll();
+    }
 
     public Cliente verificarCliente(Long id){
         Optional<Cliente> cliente = clienteRepository.findById(id);
@@ -25,12 +32,21 @@ public class ClienteService {
     public Boolean verificarCpf(String cpf) {
             
         Cliente cliente = clienteRepository.findByCpf(cpf);
+
+        return (cliente != null) ? false : true;
         
-        if(cliente != null){
+    }
 
-            return false;
+    public String cadastrarCliente(ClienteModelViewer clienteModelViewer){
 
+        if(verificarCpf(clienteModelViewer.getCpf()) == false){
+            return("Cpf Ja cadastrado!");
         }
-            return true;
-        }
+
+        Cliente cliente = clienteModelViewer.Converter();
+
+        clienteRepository.save(cliente);
+
+        return ("Cliente cadastrado com sucesso!");
+    }
 }

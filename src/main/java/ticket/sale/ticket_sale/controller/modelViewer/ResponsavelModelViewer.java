@@ -48,7 +48,7 @@ public class ResponsavelModelViewer {
         this.endereco = endereco;
     }
 
-    public Responsavel Converter(ResponsavelModelViewer responsavelModelViewer){
+    public Responsavel Converter(){
 
         return new Responsavel(nome, dataNascimento, cpf, cidade, uf, endereco);
     }
