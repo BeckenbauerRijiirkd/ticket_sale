@@ -1,23 +1,23 @@
 package ticket.sale.ticket_sale.controller.dto;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 import ticket.sale.ticket_sale.model.Venda;
 
-public class VendaDto {
+public class VendaDetalhesDto {
     private Long id;
     private String evento;
+    private String cliente;
     private String tipoDoIngresso;
     private int ingressos;
     private Double valorTotal;
 
-    public VendaDto() {
+    public VendaDetalhesDto() {
     }
 
-    public VendaDto(Venda venda) {
+    public VendaDetalhesDto(Venda venda) {
         this.id = venda.getId();
         this.evento = venda.getEvento().getNome();
+        this.cliente = venda.getCliente().getNome();
         this.tipoDoIngresso = venda.getTipoIngresso().name();
         this.ingressos = venda.getQtdIngresso();
         this.valorTotal = venda.getValorTotal();
@@ -37,6 +37,14 @@ public class VendaDto {
 
     public void setEvento(String evento) {
         this.evento = evento;
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
     public String getTipoDoIngresso() {
@@ -62,10 +70,5 @@ public class VendaDto {
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
-
-    public static List<VendaDto> converter(List<Venda> vendas){
-        return (vendas.stream().map(VendaDto::new).collect(Collectors.toList()));
-    }
-    
     
 }

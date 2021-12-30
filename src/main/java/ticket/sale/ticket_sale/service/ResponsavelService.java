@@ -21,6 +21,13 @@ ResponsavelRepository responsavelRepository;
         return responsavelRepository.findAll();
     }
 
+    public Optional<Responsavel> buscarReponsavel(Long id){
+
+        Optional<Responsavel> responsavel = responsavelRepository.findById(id);
+
+        return responsavel;
+    }
+
     public Boolean verificarCpf(String cpf) {
             
         Responsavel responsavel = responsavelRepository.findByCpf(cpf);

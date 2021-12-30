@@ -2,6 +2,7 @@ package ticket.sale.ticket_sale.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -9,13 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ticket.sale.ticket_sale.controller.dto.EventoDetalhesDto;
 import ticket.sale.ticket_sale.controller.dto.EventoDto;
 import ticket.sale.ticket_sale.controller.modelViewer.EventoModelViewer;
+import ticket.sale.ticket_sale.model.Evento;
 import ticket.sale.ticket_sale.service.EventoService;
 
 @RestController
@@ -39,4 +43,17 @@ public class EventoController {
                 ResponseEntity.ok("Evento Cadastrado Com Sucesso") :
                 ResponseEntity.badRequest().body("Responsavel nâo encontrado"));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EventoDetalhesDto> buscarEvento(@PathVariable Long id){
+        
+        Optional<Evento> evento = eventoService.buscarEvento(id);
+
+        if (evento.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok( new EventoDetalhesDto(evento.get()));
+    }
+
 }

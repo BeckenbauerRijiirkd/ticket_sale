@@ -1,6 +1,7 @@
 package ticket.sale.ticket_sale.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,13 @@ public class VendaService {
         return vendaRepository.findAll();
     }
 
+    public Optional<Venda> buscarVenda(Long id){
+
+        Optional<Venda> venda = vendaRepository.findById(id);
+
+        return venda;
+    }
+    
     public void emitirVenda(Evento evento, Cliente cliente, VendaModelViewer vendaModelViewer){
     
         if(vendaModelViewer.getTipoIngresso() == TipoIngresso.INTEIRA){

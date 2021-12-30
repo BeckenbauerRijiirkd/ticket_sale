@@ -1,12 +1,10 @@
 package ticket.sale.ticket_sale.controller.dto;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import ticket.sale.ticket_sale.model.Responsavel;
 
-public class ResponsavelDto {
+public class ResponsavelDetalhesDto {
 
     private Long id;
     private String nome;
@@ -17,13 +15,17 @@ public class ResponsavelDto {
     private String endereco;
     private int eventos;
     
-    public ResponsavelDto() {
+    public ResponsavelDetalhesDto() {
     }
 
-    public ResponsavelDto(Responsavel responsavel) {
+    public ResponsavelDetalhesDto(Responsavel responsavel) {
         this.id = responsavel.getId();
         this.nome = responsavel.getNome();
+        this.dataNascimento = responsavel.getDataNasc();
         this.cpf = responsavel.getCpf();
+        this.cidade = responsavel.getCidade();
+        this.uf = responsavel.getUf();
+        this.endereco = responsavel.getEndereco();
         this.eventos = responsavel.getEvento().size();
     }
 
@@ -89,10 +91,6 @@ public class ResponsavelDto {
 
     public void setEventos(int eventos) {
         this.eventos = eventos;
-    }
-
-    public static List<ResponsavelDto> converter(List<Responsavel> responsavel){
-        return (responsavel.stream().map(ResponsavelDto::new).collect(Collectors.toList()));
     }
 
 }

@@ -25,6 +25,13 @@ public class EventoService {
         return eventoRepository.findAll();
     }
 
+    public Optional<Evento> buscarEvento(Long id){
+
+        Optional<Evento> evento = eventoRepository.findById(id);
+
+        return evento;
+    }
+
     public Evento verificarEvento(Long id){
         Optional<Evento> evento = eventoRepository.findById(id);
         if(evento == null){
