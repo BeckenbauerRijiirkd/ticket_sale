@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ticket.sale.ticket_sale.controller.modelViewer.ResponsavelModelViewer;
+import ticket.sale.ticket_sale.controller.modelViewer.ResponsavelUpdateModelViewer;
 import ticket.sale.ticket_sale.model.Responsavel;
 import ticket.sale.ticket_sale.repository.ResponsavelRepository;
 
@@ -53,5 +54,16 @@ ResponsavelRepository responsavelRepository;
         responsavelRepository.save(responsavel);
 
         return (true);
+    }
+
+    public Responsavel atualizar(Responsavel responsavel, ResponsavelUpdateModelViewer responsavelUpdateModelViewer) {
+        
+        responsavel.setNome(responsavelUpdateModelViewer.getNome());
+        responsavel.setDataNasc(responsavelUpdateModelViewer.getDataNascimento());
+        responsavel.setCidade(responsavelUpdateModelViewer.getCidade());
+        responsavel.setUf(responsavelUpdateModelViewer.getUf());
+        responsavel.setEndereco(responsavelUpdateModelViewer.getEndereco());
+
+        return responsavel;
     }
 }

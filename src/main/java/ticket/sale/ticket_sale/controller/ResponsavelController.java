@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ticket.sale.ticket_sale.controller.dto.ResponsavelDetalhesDto;
 import ticket.sale.ticket_sale.controller.dto.ResponsavelDto;
 import ticket.sale.ticket_sale.controller.modelViewer.ResponsavelModelViewer;
+import ticket.sale.ticket_sale.controller.modelViewer.ResponsavelUpdateModelViewer;
 import ticket.sale.ticket_sale.model.Responsavel;
 import ticket.sale.ticket_sale.service.ResponsavelService;
 
@@ -53,5 +55,21 @@ public class ResponsavelController {
         }
 
         return ResponseEntity.ok( new ResponsavelDetalhesDto(responsavel.get()));
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<ResponsavelDetalhesDto> atualizar(@PathVariable Long id, @RequestBody ResponsavelUpdateModelViewer responsavelUpdateModelViewer){
+        
+        Optional<Responsavel> responsavel = responsavelService.buscarReponsavel(id);
+
+        if (responsavel.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        Responsavel responsavelAux = responsavelService.atualizar(responsavel.get(), responsavelUpdateModelViewer);
+        
+        return ResponseEntity.ok(new ResponsavelDetalhesDto(responsavelAux));
+
     }
 }
