@@ -34,7 +34,8 @@ public class ClienteController {
     @Transactional
     public ResponseEntity<String> cadastrarCliente(@RequestBody @Valid ClienteModelViewer clienteModelViewer){
 
-        return(ResponseEntity.ok(clienteService.cadastrarCliente(clienteModelViewer)));
+        return (clienteService.cadastrarCliente(clienteModelViewer) ? 
+        ResponseEntity.ok("Cliente Cadastrado Com Sucesso") :
+        ResponseEntity.badRequest().body("Cpf Ja Cadastrado"));
     }
-    
 }

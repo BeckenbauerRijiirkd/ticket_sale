@@ -33,20 +33,19 @@ public class ClienteService {
             
         Cliente cliente = clienteRepository.findByCpf(cpf);
 
-        return (cliente != null) ? false : true;
-        
+        return (cliente == null);
     }
 
-    public String cadastrarCliente(ClienteModelViewer clienteModelViewer){
+    public boolean cadastrarCliente(ClienteModelViewer clienteModelViewer){
 
         if(verificarCpf(clienteModelViewer.getCpf()) == false){
-            return("Cpf Ja cadastrado!");
+            return(false);
         }
 
         Cliente cliente = clienteModelViewer.Converter();
 
         clienteRepository.save(cliente);
 
-        return ("Cliente cadastrado com sucesso!");
+        return (true);
     }
 }

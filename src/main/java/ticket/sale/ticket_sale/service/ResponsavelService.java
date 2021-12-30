@@ -20,7 +20,7 @@ ResponsavelRepository responsavelRepository;
             
         Responsavel responsavel = responsavelRepository.findByCpf(cpf);
         
-        return (responsavel != null) ? false : true;
+        return (responsavel == null);
     }
 
     public Responsavel verificarResponsvel(Long responsavelId){
