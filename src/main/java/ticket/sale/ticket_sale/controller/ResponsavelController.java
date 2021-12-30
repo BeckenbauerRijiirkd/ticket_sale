@@ -28,7 +28,6 @@ public class ResponsavelController {
     public ResponseEntity<List<ResponsavelDto>> listar(){
         
         return ResponseEntity.ok(ResponsavelDto.converter(responsavelService.buscarResponsaveis()));
-    
     }
 
     @PostMapping

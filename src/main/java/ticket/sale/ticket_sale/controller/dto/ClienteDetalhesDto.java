@@ -1,24 +1,31 @@
 package ticket.sale.ticket_sale.controller.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import ticket.sale.ticket_sale.model.Cliente;
 
-public class ClienteDto {
+public class ClienteDetalhesDto {
 
     private Long id;
     private String nome;
+    private LocalDate dataNascimento;
     private String cpf;
+    private String cidade;
+    private String uf;
     private int compras;
     
-    public ClienteDto() {
+    public ClienteDetalhesDto() {
     }
 
-    public ClienteDto(Cliente cliente) {
+    public ClienteDetalhesDto(Cliente cliente) {
         this.id = cliente.getId();
         this.nome = cliente.getNome();
+        this.dataNascimento = cliente.getDataNasc();
         this.cpf = cliente.getCpf();
+        this.cidade = cliente.getCidade();
+        this.uf = cliente.getUf();
         this.compras = cliente.getCompra().size();
     }
 
@@ -38,6 +45,14 @@ public class ClienteDto {
         this.nome = nome;
     }
 
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
     public String getCpf() {
         return cpf;
     }
@@ -46,6 +61,21 @@ public class ClienteDto {
         this.cpf = cpf;
     }
 
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
 
     public int getCompras() {
         return compras;
@@ -55,9 +85,6 @@ public class ClienteDto {
         this.compras = compras;
     }
 
-    public static List<ClienteDto> converter(List<Cliente> cliente){
-        return (cliente.stream().map(ClienteDto::new).collect(Collectors.toList()));
-    }
-    
+
     
 }

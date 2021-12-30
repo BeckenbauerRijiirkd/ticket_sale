@@ -21,6 +21,13 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
+    public Optional<Cliente> buscarCliente(Long id){
+
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+
+        return cliente;
+    }
+
     public Cliente verificarCliente(Long id){
         Optional<Cliente> cliente = clienteRepository.findById(id);
         if(cliente == null){
