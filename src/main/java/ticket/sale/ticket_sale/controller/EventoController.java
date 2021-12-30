@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ticket.sale.ticket_sale.controller.dto.EventoDto;
 import ticket.sale.ticket_sale.controller.modelViewer.EventoModelViewer;
-import ticket.sale.ticket_sale.model.Evento;
-import ticket.sale.ticket_sale.model.Responsavel;
-import ticket.sale.ticket_sale.repository.EventoRepository;
+import ticket.sale.ticket_sale.service.EventoService;
 import ticket.sale.ticket_sale.service.ResponsavelService;
 
 @RestController
@@ -26,35 +24,23 @@ import ticket.sale.ticket_sale.service.ResponsavelService;
 public class EventoController {
     
     @Autowired
-    private EventoRepository eventoRepository;
+    ResponsavelService responsavelService;
 
     @Autowired
-    ResponsavelService responsavelService;
+    EventoService eventoService;
 
     @GetMapping
     public ResponseEntity<List<EventoDto>> listar(){
-        
-        List<Evento> eventos = eventoRepository.findAll();
 
-        return ResponseEntity.ok(EventoDto.converter(eventos));
-    
+        return ResponseEntity.ok(EventoDto.converter(eventoService.buscarEventos()));    
     }
 
     @PostMapping
     @Transactional
     public ResponseEntity<String> CriarEvento(@RequestBody @Valid EventoModelViewer eventoModelViewer){
 
-        Responsavel responsavel = responsavelService.verificarResponsvel(eventoModelViewer.getResponsavelId());
-
-        if(responsavel == null){
-            return(ResponseEntity.badRequest().body("Responsavel não encontrado"));
-        }
-
-        Evento evento = eventoModelViewer.converter(responsavel);
-
-        eventoRepository.save(evento);
-
-        return(ResponseEntity.ok("Evento Criado Com Sucesso"));
+        return (eventoService.cadastrarEvento(eventoModelViewer) ? 
+                ResponseEntity.ok("Evento Cadastrado Com Sucesso") :
+                ResponseEntity.badRequest().body("Responsavel nâo encontrado"));
     }
-
 }
