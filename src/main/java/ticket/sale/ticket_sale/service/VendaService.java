@@ -1,5 +1,7 @@
 package ticket.sale.ticket_sale.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,11 @@ public class VendaService {
 
     @Autowired
     ClienteRepository clienteRepository;
+
+    public List<Venda> buscarVendas(){
+
+        return vendaRepository.findAll();
+    }
 
     public void emitirVenda(Evento evento, Cliente cliente, VendaModelViewer vendaModelViewer){
     

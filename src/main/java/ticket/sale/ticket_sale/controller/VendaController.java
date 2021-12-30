@@ -24,9 +24,6 @@ import ticket.sale.ticket_sale.service.VendaService;
 @RestController
 @RequestMapping("/vendas")
 public class VendaController {
-    
-    @Autowired
-    private VendaRepository vendaRepository;
 
     @Autowired
     private ClienteService clienteservice;
@@ -40,14 +37,9 @@ public class VendaController {
     @GetMapping
     public ResponseEntity<List<VendaDto>> listar(){
         
-        List<Venda> vendas = vendaRepository.findAll();
-
-        return ResponseEntity.ok(VendaDto.converter(vendas));
+        return ResponseEntity.ok(VendaDto.converter(vendaService.buscarVendas()));
     
     }
-
-    //(expressão booleana) ? código 1 : código 2;
-
 
     @PostMapping
     public ResponseEntity<?> EmitirVenda(@RequestBody VendaModelViewer vendaModelViewer){
