@@ -1,8 +1,6 @@
 package ticket.sale.ticket_sale.controller.dto;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import ticket.sale.ticket_sale.model.Cliente;
 

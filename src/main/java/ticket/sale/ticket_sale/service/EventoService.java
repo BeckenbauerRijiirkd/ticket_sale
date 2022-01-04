@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ticket.sale.ticket_sale.controller.modelViewer.EventoModelViewer;
+import ticket.sale.ticket_sale.controller.modelViewer.EventoUpdateModelViewer;
 import ticket.sale.ticket_sale.model.Evento;
 import ticket.sale.ticket_sale.model.Responsavel;
 import ticket.sale.ticket_sale.repository.EventoRepository;
@@ -53,6 +54,12 @@ public class EventoService {
         eventoRepository.save(evento);
 
         return (true);
+    }
+
+    public Evento atualizar(Evento evento, EventoUpdateModelViewer eventoUpdateModelViewer){
+        evento.setStatus(eventoUpdateModelViewer.getStatus());
+        
+        return evento;
     }
 }
 

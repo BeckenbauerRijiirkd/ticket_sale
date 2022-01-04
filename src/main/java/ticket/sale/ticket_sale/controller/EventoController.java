@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ticket.sale.ticket_sale.controller.dto.EventoDetalhesDto;
 import ticket.sale.ticket_sale.controller.dto.EventoDto;
 import ticket.sale.ticket_sale.controller.modelViewer.EventoModelViewer;
+import ticket.sale.ticket_sale.controller.modelViewer.EventoUpdateModelViewer;
 import ticket.sale.ticket_sale.model.Evento;
 import ticket.sale.ticket_sale.service.EventoService;
 
@@ -54,6 +56,22 @@ public class EventoController {
         }
 
         return ResponseEntity.ok( new EventoDetalhesDto(evento.get()));
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<EventoDetalhesDto> atualizar(@PathVariable Long id, @RequestBody EventoUpdateModelViewer eventoUpdateUpdateModelViewer){
+        
+        Optional<Evento> evento = eventoService.buscarEvento(id);
+
+        if (evento.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        Evento eventoAux = eventoService.atualizar(evento.get(), eventoUpdateUpdateModelViewer);
+        
+        return ResponseEntity.ok(new EventoDetalhesDto(eventoAux));
+
     }
 
 }
