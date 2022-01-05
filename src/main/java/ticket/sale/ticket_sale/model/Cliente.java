@@ -3,13 +3,17 @@ package ticket.sale.ticket_sale.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Where;
+
 @Entity
+@Where(clause="active=1")
 public class Cliente {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +23,9 @@ public class Cliente {
     private String cpf;
     private String cidade;
     private String uf;
+
+    @Column(name="active")
+    private Boolean active = true;
 
     @OneToMany(mappedBy = "cliente")
     private List<Venda> compra;
@@ -89,6 +96,16 @@ public class Cliente {
     public void setCompra(List<Venda> compra) {
         this.compra = compra;
     }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    
     
     
 

@@ -4,6 +4,6 @@ INSERT INTO EVENTO(nome, data, responsavel_id, valor, valor_meia, status) VALUES
 
 INSERT INTO EVENTO(nome, data, responsavel_id, valor, valor_meia, status) VALUES('Evento Teste 2', '2020-10-22', '1', '20', '10', 'REALIZADO');
 
-INSERT INTO CLIENTE(nome, data_nasc, cpf, cidade, uf) VALUES('Cliente teste', '1990-11-21', '7070707070', 'aracaju', 'SE');
+INSERT INTO CLIENTE(nome, data_nasc, cpf, cidade, uf, active) VALUES('Cliente teste', '1990-11-21', '7070707070', 'aracaju', 'SE', '1');
 
 INSERT INTO VENDA(evento_id, cliente_id, tipo_ingresso, qtd_ingresso, valor_total) VALUES('1', '1', 'INTEIRA', '2','40');
