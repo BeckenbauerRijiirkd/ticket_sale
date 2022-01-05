@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,8 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Where;
+
 
 @Entity
+@Where(clause="active=1")
 public class Evento {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +34,13 @@ public class Evento {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Column(name="active")
+    private Boolean active = true;
+
     @OneToMany(mappedBy = "evento")
     private List<Venda> venda = new ArrayList<>();
+
+    
 
     public Evento() {
     }
@@ -106,4 +115,13 @@ public class Evento {
         this.venda = venda;
     }
 
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    
 }

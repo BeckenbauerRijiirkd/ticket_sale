@@ -88,5 +88,5 @@ public class ClienteController {
       
         }
             return ResponseEntity.badRequest().body("Cliente não encontrado");
-        }
+    }
 }

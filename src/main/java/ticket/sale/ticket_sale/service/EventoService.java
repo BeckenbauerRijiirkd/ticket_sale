@@ -61,5 +61,9 @@ public class EventoService {
         
         return evento;
     }
+
+    public void delete(Evento evento){
+        evento.setActive(false);
+    }
 }
 
