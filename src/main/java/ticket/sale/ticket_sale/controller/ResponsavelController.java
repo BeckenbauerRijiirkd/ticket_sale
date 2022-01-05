@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,4 +73,20 @@ public class ResponsavelController {
         return ResponseEntity.ok(new ResponsavelDetalhesDto(responsavelAux));
 
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<String> deletar(@PathVariable Long id){
+
+        Optional<Responsavel> responsavel = responsavelService.buscarReponsavel(id);
+
+        if (responsavel.isPresent()){
+
+            responsavelService.delete(responsavel.get());
+
+            return ResponseEntity.ok("Responsavel excluido com sucesso");
+      
+        }
+            return ResponseEntity.badRequest().body("Responsavel não encontrado");
+        }
 }

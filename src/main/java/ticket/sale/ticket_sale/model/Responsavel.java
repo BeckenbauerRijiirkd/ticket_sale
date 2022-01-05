@@ -3,16 +3,19 @@ package ticket.sale.ticket_sale.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Where;
+
 @Entity
+@Where(clause="active=1")
 public class Responsavel {
 
-    
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
@@ -22,15 +25,14 @@ public class Responsavel {
     private String uf;
     private String endereco;
 
+    @Column(name="active")
+    private Boolean active = true;
+
     @OneToMany(mappedBy = "responsavel")
     private List<Evento> evento;
 
-
-
     public Responsavel() {
     }
-
-    
 
     public Responsavel(String nome, LocalDate nascimento, String cpf, String cidade, String uf, String endereco) {
         this.nome = nome;
@@ -40,8 +42,6 @@ public class Responsavel {
         this.uf = uf;
         this.endereco = endereco;
     }
-
-
 
     public Long getId() {
         return id;
@@ -99,16 +99,20 @@ public class Responsavel {
         this.endereco = endereco;
     }
 
-
-
     public List<Evento> getEvento() {
         return evento;
     }
 
-
-
     public void setEvento(List<Evento> evento) {
         this.evento = evento;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     

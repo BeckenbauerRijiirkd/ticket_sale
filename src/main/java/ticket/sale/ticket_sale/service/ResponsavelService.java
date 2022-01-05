@@ -66,4 +66,8 @@ ResponsavelRepository responsavelRepository;
 
         return responsavel;
     }
+
+    public void delete(Responsavel responsavel){
+        responsavel.setActive(false);
+    }
 }

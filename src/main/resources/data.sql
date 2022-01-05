@@ -1,4 +1,4 @@
-INSERT INTO RESPONSAVEL(nome, nascimento, cpf, cidade, uf, endereco) VALUES('Responsavel teste', '2000-10-01', '123445678', 'aracaju', 'SE', 'rua 0');
+INSERT INTO RESPONSAVEL(nome, nascimento, cpf, cidade, uf, endereco, active) VALUES('Responsavel teste', '2000-10-01', '123445678', 'aracaju', 'SE', 'rua 0', '1');
 
 INSERT INTO EVENTO(nome, data, responsavel_id, valor, valor_meia, status) VALUES('Evento Teste', '2020-10-20', '1', '20', '10', 'VENDAS_ABERTAS');
 
