@@ -5,29 +5,33 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Where(clause="active=1")
+@Where(clause="ativo=1")
 public class Cliente {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private String email;
     private LocalDate dataNasc;
     private String cpf;
     private String cidade;
     private String uf;
 
-    @Column(name="active")
-    private Boolean active = true;
+    @OneToOne(fetch = FetchType.EAGER)
+    private Usuario usuario = new Usuario();
 
-    @OneToMany(mappedBy = "cliente")
+    private boolean ativo = usuario.isAtivo();
+
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Venda> compra;
 
     public Cliente() {
@@ -96,17 +100,31 @@ public class Cliente {
     public void setCompra(List<Venda> compra) {
         this.compra = compra;
     }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
     
     
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
     
 
 }

@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class Evento {
     private String nome;
     private LocalDate data;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Responsavel responsavel;
     private Double valor;
     private Double valorMeia;

@@ -68,6 +68,5 @@ public class ClienteService {
     }
 
     public void delete(Cliente cliente){
-        cliente.setActive(false);
     }
 }
