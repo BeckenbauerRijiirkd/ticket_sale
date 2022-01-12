@@ -33,6 +33,7 @@ public class TokenService {
         return Jwts.builder()
         .setIssuer("API Ticket Sale")
         .setSubject(logado.getId().toString())
+        .claim("email", logado.getEmail())
         .setIssuedAt(hoje)
         .setExpiration(dataExpiração)
         .signWith(SignatureAlgorithm.HS256, security)
