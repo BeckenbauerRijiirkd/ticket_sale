@@ -10,12 +10,21 @@ import ticket.sale.ticket_sale.controller.modelViewer.ClienteModelViewer;
 import ticket.sale.ticket_sale.controller.modelViewer.ClienteUpdateModelViewer;
 import ticket.sale.ticket_sale.model.Cliente;
 import ticket.sale.ticket_sale.repository.ClienteRepository;
+import ticket.sale.ticket_sale.repository.PerfilRepository;
+import ticket.sale.ticket_sale.repository.UsuarioRepository;
 
 @Service
 public class ClienteService {
     
     @Autowired
     ClienteRepository clienteRepository;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
+    
+    @Autowired
+    PerfilRepository perfilRepository;
+
 
     public List<Cliente> buscarClientes(){
 
@@ -51,7 +60,7 @@ public class ClienteService {
         }
 
         Cliente cliente = clienteModelViewer.Converter();
-
+    
         clienteRepository.save(cliente);
 
         return (true);
@@ -68,5 +77,7 @@ public class ClienteService {
     }
 
     public void delete(Cliente cliente){
+        cliente.getUsuario().setAtivo(false);
+        cliente.setAtivo(false);
     }
 }

@@ -3,6 +3,7 @@ package ticket.sale.ticket_sale.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class Cliente {
     private String cidade;
     private String uf;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     private Usuario usuario = new Usuario();
 
     private boolean ativo = usuario.isAtivo();
@@ -42,6 +43,15 @@ public class Cliente {
         this.cpf = cpf;
         this.cidade = cidade;
         this.uf = uf;
+    }
+
+    public Cliente(String nome, LocalDate dataNasc, String cpf, String cidade, String uf, Usuario usuario) {
+        this.nome = nome;
+        this.dataNasc = dataNasc;
+        this.cpf = cpf;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.usuario = usuario;
     }
 
     public Long getId() {

@@ -1,13 +1,20 @@
 package ticket.sale.ticket_sale.controller.modelViewer;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import ticket.sale.ticket_sale.model.Cliente;
+import ticket.sale.ticket_sale.model.Perfil;
+import ticket.sale.ticket_sale.model.Usuario;
 
 public class ClienteModelViewer {
 
@@ -25,6 +32,10 @@ public class ClienteModelViewer {
 
     @NotNull @NotEmpty @Length(min = 2)
     private String uf;
+
+    private String email;
+
+    private String senha;
 
     public String getNome() {
         return nome;
@@ -57,9 +68,34 @@ public class ClienteModelViewer {
         this.uf = uf;
     }
     
+    
+
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getSenha() {
+        return senha;
+    }
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
     public Cliente Converter(){
 
-        return new Cliente(nome, dataNascimento, cpf, cidade, uf);  
+        String passwordEncoder = new BCryptPasswordEncoder().encode(senha);
+
+        senha = new BCryptPasswordEncoder().encode(senha);
+
+        Perfil perfil = new Perfil("ROLE_CLIENTE");
+
+        List<Perfil> perfis = new ArrayList<>(); 
+        perfis.add(perfil);
+
+        Usuario usuario = new Usuario(email, senha, perfis);
+
+        return new Cliente(nome, dataNascimento, cpf, cidade, uf, usuario);  
     }
 
 }

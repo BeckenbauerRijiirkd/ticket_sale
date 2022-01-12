@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,10 +24,18 @@ public class Usuario implements UserDetails{
 	private Long id;
 	private String email;
 	private String senha;
-    private boolean ativo;
+    private boolean ativo = true;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Perfil> perfis = new ArrayList<>(); 
+
+	public Usuario(){}
+
+	public Usuario(String email, String senha, List<Perfil> perfis) {
+		this.email = email;
+		this.senha = senha;
+		this.perfis = perfis;
+	}
 
 	@Override
 	public int hashCode() {
@@ -128,7 +137,7 @@ public class Usuario implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return this.ativo;
 	}
 
 }
