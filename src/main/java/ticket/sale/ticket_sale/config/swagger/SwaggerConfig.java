@@ -19,7 +19,7 @@ import ticket.sale.ticket_sale.model.Usuario;
 public class SwaggerConfig {
 
     @Bean
-    public Docket forumApi() {
+    public Docket ticketApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("ticket.sale.ticket_sale"))

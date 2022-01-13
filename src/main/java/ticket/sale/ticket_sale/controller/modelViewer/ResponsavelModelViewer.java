@@ -1,8 +1,12 @@
 package ticket.sale.ticket_sale.controller.modelViewer;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import ticket.sale.ticket_sale.model.Perfil;
 import ticket.sale.ticket_sale.model.Responsavel;
+import ticket.sale.ticket_sale.model.Usuario;
 
 public class ResponsavelModelViewer {
 
@@ -12,6 +16,8 @@ public class ResponsavelModelViewer {
     private String cidade;
     private String uf;
     private String endereco;
+    private String email;
+    private String senha;
 
     public String getNome() {
         return nome;
@@ -61,9 +67,31 @@ public class ResponsavelModelViewer {
         this.endereco = endereco;
     }
 
-    public Responsavel Converter() {
+    public String getEmail() {
+        return email;
+    }
 
-        return new Responsavel(nome, dataNascimento, cpf, cidade, uf, endereco);
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Responsavel Converter() {
+        Perfil perfil = new Perfil("ROLE_RESPONSAVEL");
+
+        List<Perfil> perfis = new ArrayList<>();
+        perfis.add(perfil);
+
+        Usuario usuario = new Usuario(email, senha, perfis);
+
+        return new Responsavel(nome, dataNascimento, cpf, cidade, uf, endereco, usuario);
     }
 
 }

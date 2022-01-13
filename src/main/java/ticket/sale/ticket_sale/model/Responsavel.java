@@ -3,12 +3,14 @@ package ticket.sale.ticket_sale.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Where;
 
@@ -26,8 +28,10 @@ public class Responsavel {
     private String uf;
     private String endereco;
 
-    @Column(name = "active")
-    private Boolean active = true;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Usuario usuario = new Usuario();
+
+    private boolean active = usuario.isAtivo();
 
     @OneToMany(mappedBy = "responsavel")
     private List<Evento> evento;
@@ -35,13 +39,15 @@ public class Responsavel {
     public Responsavel() {
     }
 
-    public Responsavel(String nome, LocalDate nascimento, String cpf, String cidade, String uf, String endereco) {
+    public Responsavel(String nome, LocalDate nascimento, String cpf, String cidade, String uf, String endereco,
+            Usuario usuario) {
         this.nome = nome;
         this.nascimento = nascimento;
         this.cpf = cpf;
         this.cidade = cidade;
         this.uf = uf;
         this.endereco = endereco;
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -114,6 +120,14 @@ public class Responsavel {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

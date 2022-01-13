@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ticket.sale.ticket_sale.controller.modelViewer.ResponsavelModelViewer;
@@ -49,6 +50,10 @@ public class ResponsavelService {
             return (false);
         }
 
+        String passwordEnconde = new BCryptPasswordEncoder().encode(responsavelModelViewer.getSenha());
+
+        responsavelModelViewer.setSenha(passwordEnconde);
+
         Responsavel responsavel = responsavelModelViewer.Converter();
 
         responsavelRepository.save(responsavel);
@@ -68,6 +73,7 @@ public class ResponsavelService {
     }
 
     public void delete(Responsavel responsavel) {
+        responsavel.getUsuario().setAtivo(false);
         responsavel.setActive(false);
     }
 }
