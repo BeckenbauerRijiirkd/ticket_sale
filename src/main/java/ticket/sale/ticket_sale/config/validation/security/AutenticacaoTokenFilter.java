@@ -14,8 +14,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import ticket.sale.ticket_sale.model.Usuario;
 import ticket.sale.ticket_sale.repository.UsuarioRepository;
 
-
-public class AutenticacaoTokenFilter extends OncePerRequestFilter{
+public class AutenticacaoTokenFilter extends OncePerRequestFilter {
 
     private TokenService tokenService;
 
@@ -29,32 +28,33 @@ public class AutenticacaoTokenFilter extends OncePerRequestFilter{
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-            
+
         String token = recuperarToken(request);
-        
+
         boolean valido = TokenService.isTokenValido(token);
 
-        if(valido == true){
+        if (valido == true) {
             autenticarCliente(token);
         }
 
         filterChain.doFilter(request, response);
-        
+
     }
 
     private void autenticarCliente(String token) {
         Long idUsuario = tokenService.getIdUsuario(token);
         Usuario usuario = repository.findById(idUsuario).get();
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario , null, usuario.getAuthorities());
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario, null,
+                usuario.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
     private String recuperarToken(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
-        if(token == null || token.isEmpty() || !token.startsWith("Bearer ")){
+        if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
             return null;
         }
         return token.substring(7, token.length());
     }
-    
+
 }

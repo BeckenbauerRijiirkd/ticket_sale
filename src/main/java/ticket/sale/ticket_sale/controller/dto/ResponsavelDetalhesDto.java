@@ -14,7 +14,7 @@ public class ResponsavelDetalhesDto {
     private String uf;
     private String endereco;
     private int eventos;
-    
+
     public ResponsavelDetalhesDto() {
     }
 

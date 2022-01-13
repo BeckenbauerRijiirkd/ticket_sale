@@ -15,7 +15,7 @@ public class EventoDto {
     private String responsavel;
     private Double valor;
     private Double valorMeia;
-    
+
     private String status;
 
     private int vendas;
@@ -34,7 +34,6 @@ public class EventoDto {
         this.vendas = evento.getVenda().size();
     }
 
-    
     public Long getId() {
         return id;
     }
@@ -98,10 +97,9 @@ public class EventoDto {
     public void setVenda(int venda) {
         this.vendas = venda;
     }
-    
-    public static List<EventoDto> converter(List<Evento> evento){
+
+    public static List<EventoDto> converter(List<Evento> evento) {
         return (evento.stream().map(EventoDto::new).collect(Collectors.toList()));
     }
-    
 
 }

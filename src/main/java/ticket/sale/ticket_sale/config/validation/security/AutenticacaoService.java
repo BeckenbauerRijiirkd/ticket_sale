@@ -11,24 +11,22 @@ import org.springframework.stereotype.Service;
 import ticket.sale.ticket_sale.model.Usuario;
 import ticket.sale.ticket_sale.repository.UsuarioRepository;
 
-
 @Service
-public class AutenticacaoService implements UserDetailsService{
+public class AutenticacaoService implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        
+
         Optional<Usuario> usuario = repository.findByEmail(username);
 
-        if (usuario.isPresent()){
+        if (usuario.isPresent()) {
             return usuario.get();
         }
 
         throw new UsernameNotFoundException("Dados Invalidos");
     }
 
-    
 }

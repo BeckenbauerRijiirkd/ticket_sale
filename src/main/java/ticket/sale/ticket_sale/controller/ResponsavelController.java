@@ -30,63 +30,65 @@ public class ResponsavelController {
 
     @Autowired
     ResponsavelService responsavelService;
-    
+
     @GetMapping
-    public ResponseEntity<List<ResponsavelDto>> listar(){
-        
+    public ResponseEntity<List<ResponsavelDto>> listar() {
+
         return ResponseEntity.ok(ResponsavelDto.converter(responsavelService.buscarResponsaveis()));
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity<String> cadastraResponsavel(@RequestBody @Valid ResponsavelModelViewer responsavelModelViewer){
-        
-        return (responsavelService.cadastrarResponsavel(responsavelModelViewer) ? 
-                ResponseEntity.ok("Responsavel Cadastrado Com Sucesso") :
-                ResponseEntity.badRequest().body("Cpf Ja Cadastrado"));
+    public ResponseEntity<String> cadastraResponsavel(
+            @RequestBody @Valid ResponsavelModelViewer responsavelModelViewer) {
+
+        return (responsavelService.cadastrarResponsavel(responsavelModelViewer)
+                ? ResponseEntity.ok("Responsavel Cadastrado Com Sucesso")
+                : ResponseEntity.badRequest().body("Cpf Ja Cadastrado"));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponsavelDetalhesDto> buscarResponsavel(@PathVariable Long id){
-        
+    public ResponseEntity<ResponsavelDetalhesDto> buscarResponsavel(@PathVariable Long id) {
+
         Optional<Responsavel> responsavel = responsavelService.buscarReponsavel(id);
 
-        if (responsavel.isEmpty()){
+        if (responsavel.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok( new ResponsavelDetalhesDto(responsavel.get()));
+        return ResponseEntity.ok(new ResponsavelDetalhesDto(responsavel.get()));
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<ResponsavelDetalhesDto> atualizar(@PathVariable Long id, @RequestBody ResponsavelUpdateModelViewer responsavelUpdateModelViewer){
-        
+    public ResponseEntity<ResponsavelDetalhesDto> atualizar(@PathVariable Long id,
+            @RequestBody ResponsavelUpdateModelViewer responsavelUpdateModelViewer) {
+
         Optional<Responsavel> responsavel = responsavelService.buscarReponsavel(id);
 
-        if (responsavel.isEmpty()){
+        if (responsavel.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
         Responsavel responsavelAux = responsavelService.atualizar(responsavel.get(), responsavelUpdateModelViewer);
-        
+
         return ResponseEntity.ok(new ResponsavelDetalhesDto(responsavelAux));
 
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<String> deletar(@PathVariable Long id){
+    public ResponseEntity<String> deletar(@PathVariable Long id) {
 
         Optional<Responsavel> responsavel = responsavelService.buscarReponsavel(id);
 
-        if (responsavel.isPresent()){
+        if (responsavel.isPresent()) {
 
             responsavelService.delete(responsavel.get());
 
             return ResponseEntity.ok("Responsavel excluido com sucesso");
-      
+
         }
-            return ResponseEntity.badRequest().body("Responsavel não encontrado");
-        }
+        return ResponseEntity.badRequest().body("Responsavel não encontrado");
+    }
 }

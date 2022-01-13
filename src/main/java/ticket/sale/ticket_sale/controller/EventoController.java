@@ -1,6 +1,5 @@
 package ticket.sale.ticket_sale.controller;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -33,61 +32,61 @@ public class EventoController {
     EventoService eventoService;
 
     @GetMapping
-    public ResponseEntity<List<EventoDto>> listar(){
+    public ResponseEntity<List<EventoDto>> listar() {
 
-        return ResponseEntity.ok(EventoDto.converter(eventoService.buscarEventos()));    
+        return ResponseEntity.ok(EventoDto.converter(eventoService.buscarEventos()));
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity<String> CriarEvento(@RequestBody @Valid EventoModelViewer eventoModelViewer){
+    public ResponseEntity<String> CriarEvento(@RequestBody @Valid EventoModelViewer eventoModelViewer) {
 
-        return (eventoService.cadastrarEvento(eventoModelViewer) ? 
-                ResponseEntity.ok("Evento Cadastrado Com Sucesso") :
-                ResponseEntity.badRequest().body("Responsavel nâo encontrado"));
+        return (eventoService.cadastrarEvento(eventoModelViewer) ? ResponseEntity.ok("Evento Cadastrado Com Sucesso")
+                : ResponseEntity.badRequest().body("Responsavel nâo encontrado"));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EventoDetalhesDto> buscarEvento(@PathVariable Long id){
-        
+    public ResponseEntity<EventoDetalhesDto> buscarEvento(@PathVariable Long id) {
+
         Optional<Evento> evento = eventoService.buscarEvento(id);
 
-        if (evento.isEmpty()){
+        if (evento.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok( new EventoDetalhesDto(evento.get()));
+        return ResponseEntity.ok(new EventoDetalhesDto(evento.get()));
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<EventoDetalhesDto> atualizar(@PathVariable Long id, @RequestBody EventoUpdateModelViewer eventoUpdateUpdateModelViewer){
-        
+    public ResponseEntity<EventoDetalhesDto> atualizar(@PathVariable Long id,
+            @RequestBody EventoUpdateModelViewer eventoUpdateUpdateModelViewer) {
+
         Optional<Evento> evento = eventoService.buscarEvento(id);
 
-        if (evento.isEmpty()){
+        if (evento.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
         Evento eventoAux = eventoService.atualizar(evento.get(), eventoUpdateUpdateModelViewer);
-        
+
         return ResponseEntity.ok(new EventoDetalhesDto(eventoAux));
 
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<String> deletar(@PathVariable Long id){
+    public ResponseEntity<String> deletar(@PathVariable Long id) {
 
         Optional<Evento> evento = eventoService.buscarEvento(id);
 
-        if (evento.isPresent()){
+        if (evento.isPresent()) {
 
             eventoService.delete(evento.get());
 
             return ResponseEntity.ok("Evento excluido com sucesso");
-      
+
         }
-            return ResponseEntity.badRequest().body("Evento não encontrado");
+        return ResponseEntity.badRequest().body("Evento não encontrado");
     }
 }

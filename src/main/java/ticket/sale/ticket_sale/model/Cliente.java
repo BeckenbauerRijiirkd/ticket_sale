@@ -14,10 +14,11 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Where(clause="ativo=1")
+@Where(clause = "ativo=1")
 public class Cliente {
-    
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
@@ -26,7 +27,7 @@ public class Cliente {
     private String cidade;
     private String uf;
 
-    @OneToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Usuario usuario = new Usuario();
 
     private boolean ativo = usuario.isAtivo();
@@ -109,8 +110,7 @@ public class Cliente {
     public void setCompra(List<Venda> compra) {
         this.compra = compra;
     }
-    
-    
+
     public String getEmail() {
         return email;
     }
@@ -134,6 +134,5 @@ public class Cliente {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
-    
 
 }

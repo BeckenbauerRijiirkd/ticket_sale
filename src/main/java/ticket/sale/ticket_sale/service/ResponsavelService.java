@@ -13,16 +13,16 @@ import ticket.sale.ticket_sale.repository.ResponsavelRepository;
 
 @Service
 public class ResponsavelService {
-    
-@Autowired
-ResponsavelRepository responsavelRepository;
 
-    public List<Responsavel> buscarResponsaveis(){
+    @Autowired
+    ResponsavelRepository responsavelRepository;
+
+    public List<Responsavel> buscarResponsaveis() {
 
         return responsavelRepository.findAll();
     }
 
-    public Optional<Responsavel> buscarReponsavel(Long id){
+    public Optional<Responsavel> buscarReponsavel(Long id) {
 
         Optional<Responsavel> responsavel = responsavelRepository.findById(id);
 
@@ -30,23 +30,23 @@ ResponsavelRepository responsavelRepository;
     }
 
     public Boolean verificarCpf(String cpf) {
-            
+
         Responsavel responsavel = responsavelRepository.findByCpf(cpf);
-        
+
         return (responsavel == null);
     }
 
-    public Responsavel verificarResponsvel(Long responsavelId){
+    public Responsavel verificarResponsvel(Long responsavelId) {
 
-        Optional<Responsavel>  responsavelAux = responsavelRepository.findById(responsavelId);
+        Optional<Responsavel> responsavelAux = responsavelRepository.findById(responsavelId);
 
         return (responsavelAux.isPresent() ? responsavelAux.get() : null);
     }
 
-    public Boolean cadastrarResponsavel(ResponsavelModelViewer responsavelModelViewer){
+    public Boolean cadastrarResponsavel(ResponsavelModelViewer responsavelModelViewer) {
 
-        if(verificarCpf(responsavelModelViewer.getCpf()) == false){
-            return(false);
+        if (verificarCpf(responsavelModelViewer.getCpf()) == false) {
+            return (false);
         }
 
         Responsavel responsavel = responsavelModelViewer.Converter();
@@ -57,7 +57,7 @@ ResponsavelRepository responsavelRepository;
     }
 
     public Responsavel atualizar(Responsavel responsavel, ResponsavelUpdateModelViewer responsavelUpdateModelViewer) {
-        
+
         responsavel.setNome(responsavelUpdateModelViewer.getNome());
         responsavel.setDataNasc(responsavelUpdateModelViewer.getDataNascimento());
         responsavel.setCidade(responsavelUpdateModelViewer.getCidade());
@@ -67,7 +67,7 @@ ResponsavelRepository responsavelRepository;
         return responsavel;
     }
 
-    public void delete(Responsavel responsavel){
+    public void delete(Responsavel responsavel) {
         responsavel.setActive(false);
     }
 }

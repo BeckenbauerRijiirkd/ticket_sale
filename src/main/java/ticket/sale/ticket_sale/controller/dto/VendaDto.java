@@ -63,9 +63,8 @@ public class VendaDto {
         this.valorTotal = valorTotal;
     }
 
-    public static List<VendaDto> converter(List<Venda> vendas){
+    public static List<VendaDto> converter(List<Venda> vendas) {
         return (vendas.stream().map(VendaDto::new).collect(Collectors.toList()));
     }
-    
-    
+
 }

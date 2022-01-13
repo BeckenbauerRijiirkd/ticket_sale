@@ -13,7 +13,7 @@ public class EventoDetalhesDto {
     private String responsavel;
     private Double valor;
     private Double valorMeia;
-    
+
     private String status;
 
     private int vendas;
@@ -32,7 +32,6 @@ public class EventoDetalhesDto {
         this.vendas = evento.getVenda().size();
     }
 
-    
     public Long getId() {
         return id;
     }

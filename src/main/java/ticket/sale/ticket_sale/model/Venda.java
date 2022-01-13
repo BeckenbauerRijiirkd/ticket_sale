@@ -10,21 +10,22 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Venda {
-    
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
     private Evento evento;
-    
+
     @ManyToOne
     private Cliente cliente;
-    
+
     @Enumerated(EnumType.STRING)
     private TipoIngresso tipoIngresso;
     private int qtdIngresso;
     private double valorTotal;
-    
+
     public Venda() {
     }
 
@@ -84,6 +85,5 @@ public class Venda {
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
-    
-    
+
 }

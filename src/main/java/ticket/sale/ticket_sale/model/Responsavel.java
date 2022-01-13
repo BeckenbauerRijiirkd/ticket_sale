@@ -13,10 +13,11 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Where(clause="active=1")
+@Where(clause = "active=1")
 public class Responsavel {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private LocalDate nascimento;
@@ -25,7 +26,7 @@ public class Responsavel {
     private String uf;
     private String endereco;
 
-    @Column(name="active")
+    @Column(name = "active")
     private Boolean active = true;
 
     @OneToMany(mappedBy = "responsavel")
@@ -114,7 +115,5 @@ public class Responsavel {
     public void setActive(Boolean active) {
         this.active = active;
     }
-
-    
 
 }

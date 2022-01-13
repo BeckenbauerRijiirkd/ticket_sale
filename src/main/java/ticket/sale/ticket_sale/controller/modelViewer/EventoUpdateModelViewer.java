@@ -5,7 +5,6 @@ import ticket.sale.ticket_sale.model.Status;
 public class EventoUpdateModelViewer {
 
     private Status status;
-    
 
     /**
      * @return Status return the status

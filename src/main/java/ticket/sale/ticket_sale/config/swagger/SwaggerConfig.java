@@ -29,11 +29,11 @@ public class SwaggerConfig {
                 .globalOperationParameters(
                         Arrays.asList(
                                 new ParameterBuilder()
-                                    .name("Authorization")
-                                    .description("Header para Token JWT")
-                                    .modelRef(new ModelRef("string"))
-                                    .parameterType("header")
-                                    .required(false)
-                                    .build()));
+                                        .name("Authorization")
+                                        .description("Header para Token JWT")
+                                        .modelRef(new ModelRef("string"))
+                                        .parameterType("header")
+                                        .required(false)
+                                        .build()));
     }
 }

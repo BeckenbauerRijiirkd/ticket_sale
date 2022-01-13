@@ -16,7 +16,7 @@ public class ResponsavelDto {
     private String uf;
     private String endereco;
     private int eventos;
-    
+
     public ResponsavelDto() {
     }
 
@@ -91,7 +91,7 @@ public class ResponsavelDto {
         this.eventos = eventos;
     }
 
-    public static List<ResponsavelDto> converter(List<Responsavel> responsavel){
+    public static List<ResponsavelDto> converter(List<Responsavel> responsavel) {
         return (responsavel.stream().map(ResponsavelDto::new).collect(Collectors.toList()));
     }
 

@@ -11,7 +11,7 @@ public class ClienteDto {
     private String nome;
     private String cpf;
     private int compras;
-    
+
     public ClienteDto() {
     }
 
@@ -46,7 +46,6 @@ public class ClienteDto {
         this.cpf = cpf;
     }
 
-
     public int getCompras() {
         return compras;
     }
@@ -55,9 +54,8 @@ public class ClienteDto {
         this.compras = compras;
     }
 
-    public static List<ClienteDto> converter(List<Cliente> cliente){
+    public static List<ClienteDto> converter(List<Cliente> cliente) {
         return (cliente.stream().map(ClienteDto::new).collect(Collectors.toList()));
     }
-    
-    
+
 }

@@ -17,36 +17,34 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Where;
 
-
 @Entity
-@Where(clause="active=1")
+@Where(clause = "active=1")
 public class Evento {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private LocalDate data;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Responsavel responsavel;
     private Double valor;
     private Double valorMeia;
-    
+
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Column(name="active")
+    @Column(name = "active")
     private Boolean active = true;
 
     @OneToMany(mappedBy = "evento")
     private List<Venda> venda = new ArrayList<>();
 
-    
-
     public Evento() {
     }
 
-    public Evento(String nome, LocalDate data, Responsavel responsavel, Double valor, Double valorMeia, Status status){
+    public Evento(String nome, LocalDate data, Responsavel responsavel, Double valor, Double valorMeia, Status status) {
         this.nome = nome;
         this.data = data;
         this.responsavel = responsavel;
@@ -107,7 +105,6 @@ public class Evento {
         this.status = status;
     }
 
-    
     public List<Venda> getVenda() {
         return venda;
     }
@@ -124,5 +121,4 @@ public class Evento {
         this.active = active;
     }
 
-    
 }

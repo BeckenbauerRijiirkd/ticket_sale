@@ -15,21 +15,21 @@ import javax.persistence.ManyToMany;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
-
 @Entity
-public class Usuario implements UserDetails{
+public class Usuario implements UserDetails {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String email;
 	private String senha;
-    private boolean ativo = true;
-	
-	@ManyToMany(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Perfil> perfis = new ArrayList<>(); 
+	private boolean ativo = true;
 
-	public Usuario(){}
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Perfil> perfis = new ArrayList<>();
+
+	public Usuario() {
+	}
 
 	public Usuario(String email, String senha, List<Perfil> perfis) {
 		this.email = email;
@@ -87,24 +87,24 @@ public class Usuario implements UserDetails{
 	}
 
 	public boolean isAtivo() {
-        return ativo;
-    }
+		return ativo;
+	}
 
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
 
-    public List<Perfil> getPerfis() {
-        return perfis;
-    }
+	public List<Perfil> getPerfis() {
+		return perfis;
+	}
 
-    public void setPerfis(List<Perfil> perfis) {
-        this.perfis = perfis;
-    }
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
+	}
 
-    @Override
+	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		
+
 		return this.perfis;
 	}
 

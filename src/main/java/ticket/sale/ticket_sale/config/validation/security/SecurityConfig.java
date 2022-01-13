@@ -18,7 +18,7 @@ import ticket.sale.ticket_sale.repository.UsuarioRepository;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    
+
     @Autowired
     private AutenticacaoService autenticacaoService;
 
@@ -28,20 +28,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UsuarioRepository repository;
 
-
     @Override
     @Bean
     protected AuthenticationManager authenticationManager() throws Exception {
-        
+
         return super.authenticationManager();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        
+
         auth.userDetailsService(autenticacaoService).passwordEncoder(new BCryptPasswordEncoder());
 
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().sameOrigin();
@@ -49,14 +49,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
         http.authorizeRequests().antMatchers("/auth/**").permitAll();
         http.authorizeRequests().antMatchers("/clientes/**").permitAll()
-        .anyRequest().authenticated()
-        .and().csrf().disable()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and().addFilterBefore(new AutenticacaoTokenFilter(tokenService, repository), UsernamePasswordAuthenticationFilter.class);
+                .anyRequest().authenticated()
+                .and().csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().addFilterBefore(new AutenticacaoTokenFilter(tokenService, repository),
+                        UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-            web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**");
-        }
+        web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**",
+                "/swagger-resources/**");
+    }
 }

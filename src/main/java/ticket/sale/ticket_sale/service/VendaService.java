@@ -17,7 +17,7 @@ import ticket.sale.ticket_sale.repository.VendaRepository;
 
 @Service
 public class VendaService {
-    
+
     @Autowired
     VendaRepository vendaRepository;
 
@@ -27,30 +27,30 @@ public class VendaService {
     @Autowired
     ClienteRepository clienteRepository;
 
-    public List<Venda> buscarVendas(){
+    public List<Venda> buscarVendas() {
 
         return vendaRepository.findAll();
     }
 
-    public Optional<Venda> buscarVenda(Long id){
+    public Optional<Venda> buscarVenda(Long id) {
 
         Optional<Venda> venda = vendaRepository.findById(id);
 
         return venda;
     }
-    
-    public void emitirVenda(Evento evento, Cliente cliente, VendaModelViewer vendaModelViewer){
-    
-        if(vendaModelViewer.getTipoIngresso() == TipoIngresso.INTEIRA){
+
+    public void emitirVenda(Evento evento, Cliente cliente, VendaModelViewer vendaModelViewer) {
+
+        if (vendaModelViewer.getTipoIngresso() == TipoIngresso.INTEIRA) {
             vendaModelViewer.setValorTotal(vendaModelViewer.getQtdIngresso() * evento.getValor());
-        }else{
+        } else {
             vendaModelViewer.setValorTotal(vendaModelViewer.getQtdIngresso() * evento.getValorMeia());
         }
-        
-        Venda venda = new Venda(evento,cliente,
-                                 vendaModelViewer.getTipoIngresso(),
-                                  vendaModelViewer.getQtdIngresso(),
-                                   vendaModelViewer.getValorTotal());
+
+        Venda venda = new Venda(evento, cliente,
+                vendaModelViewer.getTipoIngresso(),
+                vendaModelViewer.getQtdIngresso(),
+                vendaModelViewer.getValorTotal());
         vendaRepository.save(venda);
     }
 

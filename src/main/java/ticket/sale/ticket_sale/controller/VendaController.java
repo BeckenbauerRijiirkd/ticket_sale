@@ -37,44 +37,44 @@ public class VendaController {
     private VendaService vendaService;
 
     @GetMapping
-    public ResponseEntity<List<VendaDto>> listar(){
-        
+    public ResponseEntity<List<VendaDto>> listar() {
+
         return ResponseEntity.ok(VendaDto.converter(vendaService.buscarVendas()));
-    
+
     }
 
     @PostMapping
-    public ResponseEntity<String> EmitirVenda(@RequestBody VendaModelViewer vendaModelViewer){
+    public ResponseEntity<String> EmitirVenda(@RequestBody VendaModelViewer vendaModelViewer) {
 
         Cliente cliente = clienteservice.verificarCliente(vendaModelViewer.getClienteId());
-        if(cliente == null){
+        if (cliente == null) {
             return ResponseEntity.badRequest().body("Cliente não Encontrado");
         }
 
         Evento evento = eventoService.verificarEvento(vendaModelViewer.getEventoId());
-        if(evento == null){
+        if (evento == null) {
             return ResponseEntity.badRequest().body("Evento não encontrado");
         }
 
-        if(evento.getStatus() != Status.VENDAS_ABERTAS){
+        if (evento.getStatus() != Status.VENDAS_ABERTAS) {
             return ResponseEntity.badRequest().body("Evento fechado para vendas");
         }
-        
+
         vendaService.emitirVenda(evento, cliente, vendaModelViewer);
 
         return ResponseEntity.ok("Venda Emitida Com Sucesso");
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<VendaDetalhesDto> buscarEvento(@PathVariable Long id){
-        
+    public ResponseEntity<VendaDetalhesDto> buscarEvento(@PathVariable Long id) {
+
         Optional<Venda> venda = vendaService.buscarVenda(id);
 
-        if (venda.isEmpty()){
+        if (venda.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok( new VendaDetalhesDto(venda.get()));
+        return ResponseEntity.ok(new VendaDetalhesDto(venda.get()));
     }
 
 }

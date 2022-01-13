@@ -13,7 +13,7 @@ public class ClienteDetalhesDto {
     private String cidade;
     private String uf;
     private int compras;
-    
+
     public ClienteDetalhesDto() {
     }
 
@@ -83,6 +83,4 @@ public class ClienteDetalhesDto {
         this.compras = compras;
     }
 
-
-    
 }

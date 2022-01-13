@@ -1,6 +1,5 @@
 package ticket.sale.ticket_sale.controller.dto;
 
-
 import ticket.sale.ticket_sale.model.Venda;
 
 public class VendaDetalhesDto {
@@ -70,5 +69,5 @@ public class VendaDetalhesDto {
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
-    
+
 }
