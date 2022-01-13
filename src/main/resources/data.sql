@@ -10,6 +10,6 @@ INSERT INTO CLIENTE(nome, data_nasc, cpf, cidade, uf, usuario_id, ativo) VALUES(
 
 INSERT INTO VENDA(evento_id, cliente_id, tipo_ingresso, qtd_ingresso, valor_total) VALUES('1', '1', 'INTEIRA', '2','40');
 
-INSERT INTO PERFIL(id, nome) VALUES(1, 'ROLE_MODERADOR');
+INSERT INTO PERFIL(id, nome) VALUES(1, 'ROLE_CLIENTE');
 
 INSERT INTO USUARIO_PERFIS(usuario_id, perfis_id) VALUES(1, 1);

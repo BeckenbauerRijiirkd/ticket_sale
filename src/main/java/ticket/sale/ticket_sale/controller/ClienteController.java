@@ -23,6 +23,7 @@ import ticket.sale.ticket_sale.controller.modelViewer.ClienteModelViewer;
 import ticket.sale.ticket_sale.controller.modelViewer.ClienteUpdateModelViewer;
 import ticket.sale.ticket_sale.model.Cliente;
 import ticket.sale.ticket_sale.service.ClienteService;
+import ticket.sale.ticket_sale.service.UsuarioService;
 
 @RestController
 @RequestMapping("/clientes")
@@ -30,6 +31,9 @@ public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping
     public ResponseEntity<List<ClienteDto>> listarClientes() {
@@ -40,7 +44,10 @@ public class ClienteController {
     @PostMapping
     @Transactional
     public ResponseEntity<String> cadastrarCliente(@RequestBody @Valid ClienteModelViewer clienteModelViewer) {
-
+        
+        if (usuarioService.verificarEmail(clienteModelViewer.getEmail())) {
+            return ResponseEntity.badRequest().body("Email Ja Cadastrado");
+        }
         return (clienteService.cadastrarCliente(clienteModelViewer)
                 ? ResponseEntity.ok("Cliente Cadastrado Com Sucesso")
                 : ResponseEntity.badRequest().body("Cpf Ja Cadastrado"));

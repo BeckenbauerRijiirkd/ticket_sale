@@ -23,6 +23,7 @@ import ticket.sale.ticket_sale.controller.modelViewer.ResponsavelModelViewer;
 import ticket.sale.ticket_sale.controller.modelViewer.ResponsavelUpdateModelViewer;
 import ticket.sale.ticket_sale.model.Responsavel;
 import ticket.sale.ticket_sale.service.ResponsavelService;
+import ticket.sale.ticket_sale.service.UsuarioService;
 
 @RestController
 @RequestMapping("/responsaveis")
@@ -30,6 +31,9 @@ public class ResponsavelController {
 
     @Autowired
     ResponsavelService responsavelService;
+
+    @Autowired
+    UsuarioService usuarioService;
 
     @GetMapping
     public ResponseEntity<List<ResponsavelDto>> listar() {
@@ -41,6 +45,11 @@ public class ResponsavelController {
     @Transactional
     public ResponseEntity<String> cadastraResponsavel(
             @RequestBody @Valid ResponsavelModelViewer responsavelModelViewer) {
+
+        if(usuarioService.verificarEmail(responsavelModelViewer.getEmail())){
+            return ResponseEntity.badRequest().body("Email Ja Cadastrado");
+        }
+
 
         return (responsavelService.cadastrarResponsavel(responsavelModelViewer)
                 ? ResponseEntity.ok("Responsavel Cadastrado Com Sucesso")

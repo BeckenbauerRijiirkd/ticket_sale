@@ -3,6 +3,7 @@ package ticket.sale.ticket_sale.config.validation.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -44,14 +45,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        
         http.headers().frameOptions().sameOrigin();
-        http.csrf().ignoringAntMatchers("/h2-console/**");
-        http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
-        http.authorizeRequests().antMatchers("/auth/**").permitAll();
-        http.authorizeRequests().antMatchers("/clientes/**").permitAll();
-        http.authorizeRequests().antMatchers("/responsaveis/**").permitAll()
-                .anyRequest().authenticated()
-                .and().csrf().disable()
+
+         http.authorizeRequests()
+        .antMatchers(HttpMethod.POST, "/auth").permitAll()
+        .antMatchers(HttpMethod.POST, "/clientes").permitAll()
+        .antMatchers(HttpMethod.POST, "/responsaveis").permitAll()
+        .antMatchers("/clientes/*").hasRole("CLIENTE")
+        .antMatchers("/h2-console/**").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/topicos/*").hasRole("MODERADOR")
+        .anyRequest().authenticated()
+        .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AutenticacaoTokenFilter(tokenService, repository),
                         UsernamePasswordAuthenticationFilter.class);
