@@ -21,7 +21,6 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String email;
     private LocalDate dataNasc;
     private String cpf;
     private String cidade;
@@ -111,13 +110,6 @@ public class Cliente {
         this.compra = compra;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public Usuario getUsuario() {
         return usuario;

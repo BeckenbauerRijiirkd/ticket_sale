@@ -6,8 +6,10 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,7 @@ import ticket.sale.ticket_sale.model.Cliente;
 import ticket.sale.ticket_sale.service.ClienteService;
 import ticket.sale.ticket_sale.service.UsuarioService;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
@@ -49,7 +52,7 @@ public class ClienteController {
             return ResponseEntity.badRequest().body("Email Ja Cadastrado");
         }
         return (clienteService.cadastrarCliente(clienteModelViewer)
-                ? ResponseEntity.ok("Cliente Cadastrado Com Sucesso")
+                ? ResponseEntity.status(HttpStatus.CREATED).build()
                 : ResponseEntity.badRequest().body("Cpf Ja Cadastrado"));
     }
 
