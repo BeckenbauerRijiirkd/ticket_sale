@@ -54,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.POST, "/clientes").permitAll()
         .antMatchers(HttpMethod.POST, "/responsaveis").permitAll()
         .antMatchers("/clientes/*").hasRole("CLIENTE")
+        .antMatchers("/eventos").permitAll()
         .antMatchers("/h2-console/**").permitAll()
         .antMatchers(HttpMethod.DELETE, "/topicos/*").hasRole("MODERADOR")
         .anyRequest().authenticated()

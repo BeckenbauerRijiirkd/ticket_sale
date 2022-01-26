@@ -20,6 +20,8 @@ public class EventoDto {
 
     private int vendas;
 
+    private String url = "http://localhost:4200/assets/img/Trance-Music.jpg";
+
     public EventoDto() {
     }
 
@@ -32,6 +34,14 @@ public class EventoDto {
         this.valorMeia = evento.getValorMeia();
         this.status = evento.getStatus().toString();
         this.vendas = evento.getVenda().size();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Long getId() {
