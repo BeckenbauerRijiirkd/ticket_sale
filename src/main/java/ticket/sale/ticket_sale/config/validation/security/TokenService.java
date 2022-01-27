@@ -30,6 +30,7 @@ public class TokenService {
                 .setIssuer("API Ticket Sale")
                 .setSubject(logado.getId().toString())
                 .claim("email", logado.getEmail())
+                .claim("name", logado.getUsername())
                 .setIssuedAt(hoje)
                 .setExpiration(dataExpiração)
                 .signWith(SignatureAlgorithm.HS256, security)

@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,7 @@ public class Usuario implements UserDetails {
 	private Long id;
 	private String email;
 	private String senha;
+	private String userName;
 	private boolean ativo = true;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -102,6 +104,15 @@ public class Usuario implements UserDetails {
 		this.perfis = perfis;
 	}
 
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
@@ -117,7 +128,7 @@ public class Usuario implements UserDetails {
 	@Override
 	public String getUsername() {
 
-		return this.email;
+		return this.userName;
 	}
 
 	@Override
