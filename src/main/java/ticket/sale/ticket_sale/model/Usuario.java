@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,8 +32,9 @@ public class Usuario implements UserDetails {
 	public Usuario() {
 	}
 
-	public Usuario(String email, String senha, List<Perfil> perfis) {
+	public Usuario(String email, String userName, String senha, List<Perfil> perfis) {
 		this.email = email;
+		this.userName = userName;
 		this.senha = senha;
 		this.perfis = perfis;
 	}
@@ -103,7 +103,6 @@ public class Usuario implements UserDetails {
 	public void setPerfis(List<Perfil> perfis) {
 		this.perfis = perfis;
 	}
-
 
 	public String getUserName() {
 		return userName;

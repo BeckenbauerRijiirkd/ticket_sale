@@ -17,6 +17,7 @@ public class ResponsavelModelViewer {
     private String uf;
     private String endereco;
     private String email;
+    private String userName;
     private String senha;
 
     public String getNome() {
@@ -89,7 +90,7 @@ public class ResponsavelModelViewer {
         List<Perfil> perfis = new ArrayList<>();
         perfis.add(perfil);
 
-        Usuario usuario = new Usuario(email, senha, perfis);
+        Usuario usuario = new Usuario(email,userName, senha, perfis);
 
         return new Responsavel(nome, dataNascimento, cpf, cidade, uf, endereco, usuario);
     }

@@ -36,7 +36,7 @@ public class ClienteModelViewer {
     private String uf;
 
     private String email;
-
+    private String userName;
     private String senha;
 
     public String getNome() {
@@ -87,6 +87,14 @@ public class ClienteModelViewer {
         this.email = email;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getSenha() {
         return senha;
     }
@@ -102,7 +110,7 @@ public class ClienteModelViewer {
         List<Perfil> perfis = new ArrayList<>();
         perfis.add(perfil);
 
-        Usuario usuario = new Usuario(email, senha, perfis);
+        Usuario usuario = new Usuario(email, userName, senha, perfis);
 
         return new Cliente(nome, dataNascimento, cpf, cidade, uf, usuario);
     }
