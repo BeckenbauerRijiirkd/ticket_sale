@@ -50,13 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
 
          http.authorizeRequests()
-        .antMatchers(HttpMethod.POST, "/auth").permitAll()
-        .antMatchers(HttpMethod.POST, "/clientes").permitAll()
-        .antMatchers(HttpMethod.POST, "/responsaveis").permitAll()
-        .antMatchers("/clientes/*").hasRole("CLIENTE")
-        .antMatchers("/eventos").permitAll()
-        .antMatchers("/h2-console/**").permitAll()
-        .antMatchers(HttpMethod.DELETE, "/topicos/*").hasRole("MODERADOR")
+        .antMatchers("/**").permitAll()
         .anyRequest().authenticated()
         .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
