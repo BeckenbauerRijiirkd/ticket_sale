@@ -75,9 +75,9 @@ public class ResponsavelController {
 
         Optional<Responsavel> responsavel = responsavelService.buscarReponsavel(id);
 
-        if (responsavel.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
+        // if (responsavel.isEmpty()) {
+        //     return ResponseEntity.notFound().build();
+        // }
 
         Responsavel responsavelAux = responsavelService.atualizar(responsavel.get(), responsavelUpdateModelViewer);
 
