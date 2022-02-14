@@ -41,32 +41,32 @@ public class ResponsavelController {
         return ResponseEntity.ok(ResponsavelDto.converter(responsavelService.buscarResponsaveis()));
     }
 
-    @PostMapping
-    @Transactional
-    public ResponseEntity<String> cadastraResponsavel(
-            @RequestBody @Valid ResponsavelModelViewer responsavelModelViewer) {
+    // @PostMapping
+    // @Transactional
+    // public ResponseEntity<String> cadastraResponsavel(
+    //         @RequestBody @Valid ResponsavelModelViewer responsavelModelViewer) {
 
-        if(usuarioService.verificarEmail(responsavelModelViewer.getEmail())){
-            return ResponseEntity.badRequest().body("Email Ja Cadastrado");
-        }
+    //     if(usuarioService.verificarEmail(responsavelModelViewer.getEmail())){
+    //         return ResponseEntity.badRequest().body("Email Ja Cadastrado");
+    //     }
 
 
-        return (responsavelService.cadastrarResponsavel(responsavelModelViewer)
-                ? ResponseEntity.ok("Responsavel Cadastrado Com Sucesso")
-                : ResponseEntity.badRequest().body("Cpf Ja Cadastrado"));
-    }
+    //     return (responsavelService.cadastrarResponsavel(responsavelModelViewer)
+    //             ? ResponseEntity.ok("Responsavel Cadastrado Com Sucesso")
+    //             : ResponseEntity.badRequest().body("Cpf Ja Cadastrado"));
+    // }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ResponsavelDetalhesDto> buscarResponsavel(@PathVariable Long id) {
+    // @GetMapping("/{id}")
+    // public ResponseEntity<ResponsavelDetalhesDto> buscarResponsavel(@PathVariable Long id) {
 
-        Optional<Responsavel> responsavel = responsavelService.buscarReponsavel(id);
+    //     Optional<Responsavel> responsavel = responsavelService.buscarReponsavel(id);
 
-        if (responsavel.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
+    //     if (responsavel.isEmpty()) {
+    //         return ResponseEntity.notFound().build();
+    //     }
 
-        return ResponseEntity.ok(new ResponsavelDetalhesDto(responsavel.get()));
-    }
+    //     return ResponseEntity.ok(new ResponsavelDetalhesDto(responsavel.get()));
+    // }
 
     @PutMapping("/{id}")
     @Transactional

@@ -14,14 +14,14 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    public Boolean verificarEmail(String email) {
+    // public Boolean verificarEmail(String email) {
 
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+    //     Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
 
-        if(usuario.isEmpty()){
-            return false;
-        }
+    //     if(usuario.isEmpty()){
+    //         return false;
+    //     }
 
-        return true;
-    }
+    //     return true;
+    // }
 }
