@@ -47,7 +47,7 @@ public class ClienteController {
     @PostMapping
     @Transactional
     public ResponseEntity<String> cadastrarCliente(@RequestBody @Valid ClienteModelViewer clienteModelViewer) {
-//teste-deploy-aut
+//teste-deploy
         if (usuarioService.verificarEmail(clienteModelViewer.getEmail())) {
             return ResponseEntity.badRequest().body("Email Ja Cadastrado");
         }
