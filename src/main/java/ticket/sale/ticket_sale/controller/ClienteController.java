@@ -44,46 +44,46 @@ public class ClienteController {
         return ResponseEntity.ok(ClienteDto.converter(clienteService.buscarClientes()));
     }
 
-    @PostMapping
-    @Transactional
-    public ResponseEntity<String> cadastrarCliente(@RequestBody @Valid ClienteModelViewer clienteModelViewer) {
+    // @PostMapping
+    // @Transactional
+    // public ResponseEntity<String> cadastrarCliente(@RequestBody @Valid ClienteModelViewer clienteModelViewer) {
 
-        if (usuarioService.verificarEmail(clienteModelViewer.getEmail())) {
-            return ResponseEntity.badRequest().body("Email Ja Cadastrado");
-        }
-        return (clienteService.cadastrarCliente(clienteModelViewer)
-                ? ResponseEntity.status(HttpStatus.CREATED).build()
-                : ResponseEntity.badRequest().body("Cpf Ja Cadastrado"));
-    }
+    //     if (usuarioService.verificarEmail(clienteModelViewer.getEmail())) {
+    //         return ResponseEntity.badRequest().body("Email Ja Cadastrado");
+    //     }
+    //     return (clienteService.cadastrarCliente(clienteModelViewer)
+    //             ? ResponseEntity.status(HttpStatus.CREATED).build()
+    //             : ResponseEntity.badRequest().body("Cpf Ja Cadastrado"));
+    // }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ClienteDetalhesDto> buscarCliente(@PathVariable Long id) {
+    // @GetMapping("/{id}")
+    // public ResponseEntity<ClienteDetalhesDto> buscarCliente(@PathVariable Long id) {
 
-        Optional<Cliente> cliente = clienteService.buscarCliente(id);
+    //     Optional<Cliente> cliente = clienteService.buscarCliente(id);
 
-        if (cliente.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
+    //     if (cliente.isEmpty()) {
+    //         return ResponseEntity.notFound().build();
+    //     }
 
-        return ResponseEntity.ok(new ClienteDetalhesDto(cliente.get()));
-    }
+    //     return ResponseEntity.ok(new ClienteDetalhesDto(cliente.get()));
+    // }
 
-    @PutMapping("/{id}")
-    @Transactional
-    public ResponseEntity<ClienteDetalhesDto> atualizar(@PathVariable Long id,
-            @RequestBody ClienteUpdateModelViewer clienteUpdateModelViewer) {
+    // @PutMapping("/{id}")
+    // @Transactional
+    // public ResponseEntity<ClienteDetalhesDto> atualizar(@PathVariable Long id,
+    //         @RequestBody ClienteUpdateModelViewer clienteUpdateModelViewer) {
 
-        Optional<Cliente> cliente = clienteService.buscarCliente(id);
+    //     Optional<Cliente> cliente = clienteService.buscarCliente(id);
 
-        if (cliente.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
+    //     if (cliente.isEmpty()) {
+    //         return ResponseEntity.notFound().build();
+    //     }
 
-        Cliente clienteAux = clienteService.atualizar(cliente.get(), clienteUpdateModelViewer);
+    //     Cliente clienteAux = clienteService.atualizar(cliente.get(), clienteUpdateModelViewer);
 
-        return ResponseEntity.ok(new ClienteDetalhesDto(clienteAux));
+    //     return ResponseEntity.ok(new ClienteDetalhesDto(clienteAux));
 
-    }
+    // }
 
     @DeleteMapping("/{id}")
     @Transactional
