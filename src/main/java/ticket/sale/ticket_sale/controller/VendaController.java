@@ -65,16 +65,16 @@ public class VendaController {
         return ResponseEntity.ok("Venda Emitida Com Sucesso");
     }
 
-    // @GetMapping("/{id}")
-    // public ResponseEntity<VendaDetalhesDto> buscarEvento(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<VendaDetalhesDto> buscarEvento(@PathVariable Long id) {
 
-    //     Optional<Venda> venda = vendaService.buscarVenda(id);
+        Optional<Venda> venda = vendaService.buscarVenda(id);
 
-    //     if (venda.isEmpty()) {
-    //         return ResponseEntity.notFound().build();
-    //     }
+        if (venda.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
 
-    //     return ResponseEntity.ok(new VendaDetalhesDto(venda.get()));
-    // }
+        return ResponseEntity.ok(new VendaDetalhesDto(venda.get()));
+    }
 
 }

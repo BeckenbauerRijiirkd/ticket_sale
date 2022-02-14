@@ -48,34 +48,34 @@ public class EventoController {
                 : ResponseEntity.badRequest().body("Responsavel nâo encontrado"));
     }
 
-    // @GetMapping("/{id}")
-    // public ResponseEntity<EventoDetalhesDto> buscarEvento(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<EventoDetalhesDto> buscarEvento(@PathVariable Long id) {
 
-    //     Optional<Evento> evento = eventoService.buscarEvento(id);
+        Optional<Evento> evento = eventoService.buscarEvento(id);
 
-    //     if (evento.isEmpty()) {
-    //         return ResponseEntity.notFound().build();
-    //     }
+        if (evento.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
 
-    //     return ResponseEntity.ok(new EventoDetalhesDto(evento.get()));
-    // }
+        return ResponseEntity.ok(new EventoDetalhesDto(evento.get()));
+    }
 
-    // @PutMapping("/{id}")
-    // @Transactional
-    // public ResponseEntity<EventoDetalhesDto> atualizar(@PathVariable Long id,
-    //         @RequestBody EventoUpdateModelViewer eventoUpdateUpdateModelViewer) {
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<EventoDetalhesDto> atualizar(@PathVariable Long id,
+            @RequestBody EventoUpdateModelViewer eventoUpdateUpdateModelViewer) {
 
-    //     Optional<Evento> evento = eventoService.buscarEvento(id);
+        Optional<Evento> evento = eventoService.buscarEvento(id);
 
-    //     if (evento.isEmpty()) {
-    //         return ResponseEntity.notFound().build();
-    //     }
+        if (evento.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
 
-    //     Evento eventoAux = eventoService.atualizar(evento.get(), eventoUpdateUpdateModelViewer);
+        Evento eventoAux = eventoService.atualizar(evento.get(), eventoUpdateUpdateModelViewer);
 
-    //     return ResponseEntity.ok(new EventoDetalhesDto(eventoAux));
+        return ResponseEntity.ok(new EventoDetalhesDto(eventoAux));
 
-    // }
+    }
 
     @DeleteMapping("/{id}")
     @Transactional
