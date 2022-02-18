@@ -20,7 +20,7 @@ public class EventoDto {
 
     private int vendas;
 
-    private String url = "http://localhost:4200/assets/img/Trance-Music.jpg";
+    private String url = "https://ticketsale.vercel.app/assets/img/Trance-Music.jpg";
 
     public EventoDto() {
     }
