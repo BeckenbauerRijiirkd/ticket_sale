@@ -19,7 +19,7 @@ import ticket.sale.ticket_sale.config.validation.security.TokenService;
 import ticket.sale.ticket_sale.controller.dto.TokenDto;
 import ticket.sale.ticket_sale.controller.modelViewer.LoginForm;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://ticketsale.vercel.app")
 @RestController
 @RequestMapping("/auth")
 // @Profile(value = {"prod", "test"})
