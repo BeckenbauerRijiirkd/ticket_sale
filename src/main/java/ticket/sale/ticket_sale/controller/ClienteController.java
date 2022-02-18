@@ -27,7 +27,7 @@ import ticket.sale.ticket_sale.model.Cliente;
 import ticket.sale.ticket_sale.service.ClienteService;
 import ticket.sale.ticket_sale.service.UsuarioService;
 
-@CrossOrigin(origins = "*")
+
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {

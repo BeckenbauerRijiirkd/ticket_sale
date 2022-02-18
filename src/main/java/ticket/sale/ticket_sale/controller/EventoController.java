@@ -26,7 +26,7 @@ import ticket.sale.ticket_sale.model.Evento;
 import ticket.sale.ticket_sale.service.EventoService;
 
 
-@CrossOrigin(origins = "*")
+
 @RestController
 @RequestMapping("/eventos")
 public class EventoController {
