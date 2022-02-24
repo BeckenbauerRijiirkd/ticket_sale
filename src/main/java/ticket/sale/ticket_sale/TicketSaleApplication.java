@@ -14,6 +14,6 @@ public class TicketSaleApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TicketSaleApplication.class, args);
 	}
-	//ALTERAÇÃO PARA TESTE NO JIRA
+	//ALTERAÇÃO PARA TESTE NO JIRA TIC-2
 
 }
