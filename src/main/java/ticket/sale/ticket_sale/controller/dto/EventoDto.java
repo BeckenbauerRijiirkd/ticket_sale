@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+
 import ticket.sale.ticket_sale.model.Evento;
 
 public class EventoDto {
@@ -112,4 +114,7 @@ public class EventoDto {
         return (evento.stream().map(EventoDto::new).collect(Collectors.toList()));
     }
 
+    public static Page<EventoDto> converter(Page<Evento> topicos){
+        return topicos.map(EventoDto::new);
+    }
 }

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ticket.sale.ticket_sale.controller.modelViewer.EventoModelViewer;
@@ -21,9 +23,9 @@ public class EventoService {
     @Autowired
     ResponsavelService responsavelService;
 
-    public List<Evento> buscarEventos() {
+    public Page<Evento> buscarEventos(Pageable paginacao) {
 
-        return eventoRepository.findAll();
+        return eventoRepository.findAll(paginacao);
     }
 
     public Optional<Evento> buscarEvento(Long id) {
