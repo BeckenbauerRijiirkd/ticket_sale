@@ -6,6 +6,10 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ticket.sale.ticket_sale.controller.dto.EventoDetalhesDto;
@@ -23,8 +28,8 @@ import ticket.sale.ticket_sale.controller.dto.EventoDto;
 import ticket.sale.ticket_sale.controller.modelViewer.EventoModelViewer;
 import ticket.sale.ticket_sale.controller.modelViewer.EventoUpdateModelViewer;
 import ticket.sale.ticket_sale.model.Evento;
+import ticket.sale.ticket_sale.repository.EventoRepository;
 import ticket.sale.ticket_sale.service.EventoService;
-
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -35,9 +40,14 @@ public class EventoController {
     EventoService eventoService;
 
     @GetMapping
-    public ResponseEntity<List<EventoDto>> listar() {
+    public Page<EventoDto> listar(@RequestParam(required = false) String nomeCurso,
+    @PageableDefault(sort = "id", direction = Direction.DESC, page = 0, size = 10)
+     Pageable paginacao){
 
-        return ResponseEntity.ok(EventoDto.converter(eventoService.buscarEventos()));
+        Page<Evento> eventos = eventoService.buscarEventos(paginacao);
+
+        return EventoDto.converter(eventos);  
+
     }
 
     @PostMapping
