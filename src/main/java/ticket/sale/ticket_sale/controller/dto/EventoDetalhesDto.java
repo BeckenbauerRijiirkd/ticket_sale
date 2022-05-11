@@ -18,6 +18,8 @@ public class EventoDetalhesDto {
 
     private int vendas;
 
+    private String url = "https://ticketsale.vercel.app/assets/img/Trance-Music.jpg";
+
     public EventoDetalhesDto() {
     }
 
@@ -32,6 +34,14 @@ public class EventoDetalhesDto {
         this.vendas = evento.getVenda().size();
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    
     public Long getId() {
         return id;
     }
