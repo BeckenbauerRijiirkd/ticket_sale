@@ -31,6 +31,7 @@ public class TokenService {
                 .setSubject(logado.getId().toString())
                 .claim("email", logado.getEmail())
                 .claim("name", logado.getUsername())
+                .claim("tipo", logado.getPerfis())
                 .setIssuedAt(hoje)
                 .setExpiration(dataExpiração)
                 .signWith(SignatureAlgorithm.HS256, security)

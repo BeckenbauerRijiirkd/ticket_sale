@@ -58,7 +58,6 @@ public class ClienteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ClienteDetalhesDto> buscarCliente(@PathVariable Long id) {
-
         Optional<Cliente> cliente = clienteService.buscarCliente(id);
 
         if (cliente.isEmpty()) {
